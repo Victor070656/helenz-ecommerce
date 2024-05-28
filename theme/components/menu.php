@@ -23,14 +23,16 @@
         </div>
         <div class="" id="headerNav">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link search-dropdown" href="#" id="searchDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i data-feather="search"></i></a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-lg search-drop-menu" aria-labelledby="searchDropDown">
-                        <form>
-                            <input class="form-control" type="text" placeholder="Type something.." aria-label="Search">
-                        </form>
-                    </div>
-                </li>
+                <?php if (parse_url($_SERVER["REQUEST_URI"])["path"] == "/show-products" || parse_url($_SERVER["REQUEST_URI"])["path"] == "/show-orders" || parse_url($_SERVER["REQUEST_URI"])["path"] == "/show-users") : ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link search-dropdown" href="#" id="searchDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i data-feather="search"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-lg search-drop-menu" aria-labelledby="searchDropDown">
+                            <form method="get">
+                                <input class="form-control" name="s" type="search" placeholder="Type something.." aria-label="Search">
+                            </form>
+                        </div>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link profile-dropdown" href="#" id="profileDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="theme/assets/images/avatars/profile-image-1.png" alt=""></a>
                     <div class="dropdown-menu dropdown-menu-end profile-drop-menu" aria-labelledby="profileDropDown">
