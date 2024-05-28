@@ -9,6 +9,7 @@ $uri_raw = $_SERVER["REQUEST_URI"];
 
 $parsed_uri = parse_url($uri_raw);
 $uri = $parsed_uri["path"];
+// var_dump($uri);
 
 $routes = [
     '/' => "pages/index.php",
@@ -22,7 +23,20 @@ $routes = [
     '/register' => "pages/register.php",
     '/wish' => "pages/wishlist.php",
     '/faq' => "pages/faq.php",
+
+
+
+    '/admin-login' => "theme/admin/login.php",
+    '/dashboard' => "theme/admin/index.php",
+    '/add-product' => "theme/admin/addproduct.php",
+    '/edit-product' => "theme/admin/editproduct.php",
+    '/show-products' => "theme/admin/products.php",
+    '/show-orders' => "theme/admin/orders.php",
+    '/show-users' => "theme/admin/users.php",
+    '/admin-profile' => "theme/admin/adminprofile.php",
+    '/logout' => "theme/admin/logout.php",
 ];
+
 
 if (array_key_exists($uri, $routes)) {
     include($routes[$uri]);

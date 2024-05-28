@@ -14,30 +14,16 @@
                                     </svg>
                                 </span>
                             </h4>
-                            <ul class="footer-menu list-unstyled mb-0 d-md-block">
-                                <li class="footer-menu-item">
-                                    <a href="about-us.html">About us</a>
-                                </li>
-                                <li class="footer-menu-item">
-                                    <a href="about-us.html">Press center</a>
-                                </li>
-                                <li class="footer-menu-item">
-                                    <a href="blog.html">Our magazine</a>
-                                </li>
-                                <li class="footer-menu-item">
-                                    <a href="about-us.html">Our group</a>
-                                </li>
-                                <li class="footer-menu-item">
-                                    <a href="about-us.html">Work with us</a>
-                                </li>
-                            </ul>
+                            <div class="footer-menu list-unstyled mb-0 d-md-block text-white ">
+                                <p style="text-align: justify;">Passion Personified: More than just footwear, Helenz Footwear embodies the rich heritage of Africa, brought to life by Helen Ogochukwu Nwiba's unwavering passion. Each piece is a vibrant tapestry, showcasing the intricate beadwork, bold colors, and storytelling motifs that are hallmarks of African artistry. With Helenz Footwear, every step is a walk through art, a celebration of culture, and a connection to something bigger.</p>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-xl-2 col-lg-2 col-md-6 col-12 footer-widget">
                         <div class="footer-widget-inner">
                             <h4 class="footer-heading d-flex align-items-center justify-content-between">
-                                <span>Help</span>
+                                <span>Quick Links</span>
                                 <span class="d-md-none">
                                     <svg class="icon icon-dropdown" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -46,16 +32,19 @@
                             </h4>
                             <ul class="footer-menu list-unstyled mb-0 d-md-block">
                                 <li class="footer-menu-item">
-                                    <a href="faq.html">Chair</a>
+                                    <a href="/">Home</a>
                                 </li>
                                 <li class="footer-menu-item">
-                                    <a href="about-us.html">Privacy policy</a>
+                                    <a href="/shop">Shop</a>
                                 </li>
                                 <li class="footer-menu-item">
-                                    <a href="about-us.html">Support</a>
+                                    <a href="/about">About</a>
                                 </li>
                                 <li class="footer-menu-item">
-                                    <a href="contact.html">Contact</a>
+                                    <a href="/faq">FAQ</a>
+                                </li>
+                                <li class="footer-menu-item">
+                                    <a href="/contact">Contact</a>
                                 </li>
                             </ul>
                         </div>
