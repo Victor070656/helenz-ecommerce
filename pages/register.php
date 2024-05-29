@@ -84,7 +84,7 @@
         <div class="breadcrumb">
             <div class="container">
                 <ul class="list-unstyled d-flex align-items-center m-0">
-                    <li><a href="https://spreethemesprevious.github.io/">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li>
                         <svg class="icon icon-breadcrumb" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.4">
@@ -101,39 +101,88 @@
         <main id="MainContent" class="content-for-layout">
             <div class="login-page mt-100">
                 <div class="container">
-                    <form action="#" class="login-form common-form mx-auto">
+                    <form method="post" class="login-form common-form mx-auto">
+                        <?php
+                        $userError = $emailError = $passwordError = "";
+                        ?>
                         <div class="section-header mb-3">
                             <h2 class="section-heading text-center">Register</h2>
                         </div>
                         <div class="row">
                             <div class="col-12">
                                 <fieldset>
-                                    <label class="label">First name</label>
-                                    <input type="text" />
+                                    <label class="label">First name </label>
+                                    <input type="text" name="first" placeholder="John" required />
                                 </fieldset>
                             </div>
                             <div class="col-12">
                                 <fieldset>
                                     <label class="label">Last name</label>
-                                    <input type="text" />
+                                    <input type="text" name="last" placeholder="Doe" required />
                                 </fieldset>
                             </div>
                             <div class="col-12">
                                 <fieldset>
-                                    <label class="label">Email address</label>
-                                    <input type="email" />
+                                    <label class="label">Username <small class="text-danger"><?= $userError; ?></small></label>
+                                    <input type="text" name="username" placeholder="john3591" required />
                                 </fieldset>
                             </div>
                             <div class="col-12">
                                 <fieldset>
-                                    <label class="label">Password</label>
-                                    <input type="password" />
+                                    <label class="label">Phone Number</label>
+                                    <input type="text" name="phone" placeholder="+234 80 ------" required />
+                                </fieldset>
+                            </div>
+                            <div class="col-12">
+                                <fieldset>
+                                    <label class="label">Email address <small class="text-danger"><?= $emailError; ?></small></label>
+                                    <input type="email" name="email" placeholder="abc@example.com" required />
+                                </fieldset>
+                            </div>
+                            <div class="col-12">
+                                <fieldset>
+                                    <label class="label">Password <small class="text-danger"><?= $passwordError; ?></small></label>
+                                    <input type="password" name="password" placeholder="******" required />
                                 </fieldset>
                             </div>
                             <div class="col-12 mt-3">
-                                <button type="submit" class="btn-primary d-block mt-3 btn-signin">CREATE</button>
+                                <button type="submit" name="create" class="btn-primary d-block mt-3 btn-signin">CREATE</button>
                             </div>
                         </div>
+
+                        <!-- process the form -->
+                        <?php
+                        if (isset($_POST["create"])) {
+                            $userid = rand(10000000, 99999999);
+                            $first = $_POST["first"];
+                            $last = $_POST["last"];
+                            $username = $_POST["username"];
+                            $phone = $_POST["phone"];
+                            $email = $_POST["email"];
+                            $password = $_POST["password"];
+
+
+                            $checkUser = mysqli_query($conn, "SELECT * FROM `users` WHERE `username`='$username'");
+                            $checkEmail = mysqli_query($conn, "SELECT * FROM `users` WHERE `email`='$email'");
+                            if (mysqli_num_rows($checkUser) > 0) {
+                                echo "<script>alert('Username already in use!')</script>";
+                            } elseif (strlen(trim($username)) < 6) {
+                                echo "<script>alert('Username cannot be less than 6 characters!')</script>";
+                            } elseif (!filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
+                                echo "<script>alert('Invalid email format!')</script>";
+                            } elseif (mysqli_num_rows($checkEmail) > 0) {
+                                echo "<script>alert('Email already in use!')</script>";
+                            } elseif (strlen(trim($password)) < 6) {
+                                echo "<script>alert('Password cannot be less than 6 characters!')</script>";
+                            } else {
+                                $register = mysqli_query($conn, "INSERT INTO `users`(`userid`, `firstname`, `lastname`, `username`, `phone`, `email`, `password`)
+                                VALUES('$userid','$first','$last','$username','$phone','$email','$password')");
+                                if ($register) {
+                                    echo "<script>alert('Registration successful ✅');location.href='/login'</script>";
+                                }
+                            }
+                        }
+                        ?>
                     </form>
                 </div>
             </div>

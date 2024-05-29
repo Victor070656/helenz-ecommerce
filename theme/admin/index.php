@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION["admin"])) {
+  echo "<script>location.href='/admin-login'</script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

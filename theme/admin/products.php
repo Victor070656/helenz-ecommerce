@@ -1,3 +1,12 @@
+<?php
+if (!isset($_SESSION["admin"])) {
+  echo "<script>location.href='/admin-login'</script>";
+}
+
+if (isset($_GET["s"])) {
+  $s = $_GET["s"];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,27 +70,75 @@
                       <thead>
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">Client</th>
-                          <th scope="col">Issued Date</th>
-                          <th scope="col">Total</th>
-                          <th scope="col">Handle</th>
+                          <th scope="col">Image</th>
+                          <th scope="col">Product Name</th>
+                          <th scope="col">Tags</th>
+                          <th scope="col">Price ($)</th>
+                          <th scope="col">Discount (%)</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Date</th>
                           <th scope="col">Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">3311</th>
-                          <td><img src="theme/assets/images/avatars/profile-image-1.png" alt=""> Nina Doe</td>
-                          <td>11 APR 2021</td>
-                          <td>$3223</td>
-                          <td><span class="badge bg-primary">Delivered</span></td>
-                          <td>
-                            <a href="#"><i data-feather="edit"></i></a>
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
+                        <?php
+                        if (isset($s)) {
+                          $getproducts = mysqli_query($conn, "SELECT * FROM `products` WHERE (`name` LIKE '%$s%') OR (`tags` LIKE '%$s%') OR (`description` LIKE '%$s%') ORDER BY `id` DESC");
+                        } else {
+                          $getproducts = mysqli_query($conn, "SELECT * FROM `products` ORDER BY `id` DESC");
+                        }
+
+                        if (mysqli_num_rows($getproducts) > 0) :
+                          while ($product = mysqli_fetch_assoc($getproducts)) :
+                            $product = (object)$product;
+                        ?>
+                            <tr>
+                              <th scope="row"><?= $product->productid ?></th>
+                              <td><img src="<?= 'uploads/' . $product->image ?>" style="width: 70px; height: 55px; object-fit: contain; "></td>
+                              <td><?= $product->name; ?></td>
+                              <td>
+                                <?php
+                                $tagss = explode(",", $product->tags);
+                                foreach ($tagss as $tag) {
+                                  $tag = trim($tag);
+                                ?>
+                                  <span class="badge bg-secondary mb-1"><?= $tag . " "; ?></span>
+                                <?php
+                                }
+                                ?>
+                              </td>
+                              <td>$<?= $product->price; ?></td>
+                              <td><?= $product->discount; ?>%</td>
+                              <td>
+                                <?php
+                                if ($product->status == "available") {
+
+                                ?>
+                                  <a href="/unavailable?pid=<?= $product->productid; ?>">
+                                    <span class="badge bg-primary small "><?= strtoupper($product->status); ?></span>
+                                  </a>
+                                <?php
+                                } else {
+                                ?>
+                                  <a href="/available?pid=<?= $product->productid; ?>">
+                                    <span class="badge bg-danger small "><?= strtoupper($product->status); ?></span>
+                                  </a>
+                                <?php
+                                }
+                                ?>
+                              </td>
+                              <td><?= $product->created_at; ?></td>
+                              <td>
+                                <a href="/edit-product?pid=<?= $product->productid; ?>"><i data-feather="edit"></i></a>
+                                <!-- <a href="#"><i data-feather="eye"></i></a> -->
+                                <a href="/delete-product?pid=<?= $product->productid; ?>"><i data-feather="trash"></i></a>
+                              </td>
+                            </tr>
+                        <?php
+                          endwhile;
+                        endif;
+                        ?>
+                        <!-- <tr>
                           <th scope="row">2331</th>
                           <td><img src="theme/assets/images/avatars/profile-image-2.png" alt=""> John Doe</td>
                           <td>7 APR 2021</td>
@@ -128,7 +185,7 @@
                             <a href="#"><i data-feather="eye"></i></a>
                             <a href="#"><i data-feather="trash"></i></a>
                           </td>
-                        </tr>
+                        </tr> -->
                       </tbody>
                     </table>
                   </div>

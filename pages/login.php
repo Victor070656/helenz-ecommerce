@@ -84,7 +84,7 @@
         <div class="breadcrumb">
             <div class="container">
                 <ul class="list-unstyled d-flex align-items-center m-0">
-                    <li><a href="https://spreethemesprevious.github.io/">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li>
                         <svg class="icon icon-breadcrumb" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.4">
@@ -101,7 +101,7 @@
         <main id="MainContent" class="content-for-layout">
             <div class="login-page mt-100">
                 <div class="container">
-                    <form action="#" class="login-form common-form mx-auto">
+                    <form method="post" class="login-form common-form mx-auto">
                         <div class="section-header mb-3">
                             <h2 class="section-heading text-center">Login</h2>
                         </div>
@@ -109,21 +109,35 @@
                             <div class="col-12">
                                 <fieldset>
                                     <label class="label">Email address</label>
-                                    <input type="email" />
+                                    <input type="email" name="email" placeholder="abc@example.com" />
                                 </fieldset>
                             </div>
                             <div class="col-12">
                                 <fieldset>
                                     <label class="label">Password</label>
-                                    <input type="password" />
+                                    <input type="password" name="password" placeholder="******" />
                                 </fieldset>
                             </div>
-                            <div class="col-12 mt-3">
+                            <div class="col-12 mt-3 text-center">
                                 <a href="#" class="text_14 d-block">Forgot your password?</a>
-                                <button type="submit" class="btn-primary d-block mt-4 btn-signin">SIGN IN</button>
-                                <a href="/register" class="btn-secondary mt-2 btn-signin">CREATE AN ACCOUNT</a>
+                                <button type="submit" name="login" class="btn-primary d-block mt-4 btn-signin">SIGN IN</button>
+                                <a href="/register" class="btn btn-link mt-2 ">CREATE AN ACCOUNT</a>
                             </div>
                         </div>
+                        <!-- login -->
+                        <?php
+                        if (isset($_POST["login"])) {
+                            $email = $_POST["email"];
+                            $password = $_POST["password"];
+
+                            $loginUser = mysqli_query($conn, "SELECT * FROM `users` WHERE `email`='$email' AND `password`='$password'");
+                            if (mysqli_num_rows($loginUser) > 0) {
+                                $user = mysqli_fetch_assoc($loginUser);
+                                $_SESSION["user"] = $user;
+                                echo "<script>alert('Login successful ✅'); location.href='/'</script>";
+                            }
+                        }
+                        ?>
                     </form>
                 </div>
             </div>

@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION["admin"])) {
+  echo "<script>location.href='/admin-login'</script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,11 +40,11 @@
 </head>
 
 <body>
-  <div class="loader">
+  <!-- <div class="loader">
     <div class="spinner-grow text-primary" role="status">
       <span class="sr-only">Loading...</span>
     </div>
-  </div>
+  </div> -->
 
   <div class="page-container">
     <?php include("theme/components/menu.php"); ?>
@@ -50,37 +55,63 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Add Product</h5>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                   <div class="row">
                     <div class="col-12 mb-3">
                       <label class="form-label">Product Name</label>
-                      <input type="text" name="name" class="form-control" placeholder="Beaded Wall clock ...">
+                      <input type="text" name="name" class="form-control" placeholder="Beaded Wall clock ..." required>
                     </div>
                     <div class="col-12 mb-3">
                       <label class="form-label">Tags</label>
-                      <input type="text" name="tags" class="form-control" placeholder="Associated terms (Seperated by comma ' , ')">
+                      <input type="text" name="tags" class="form-control" required placeholder="Associated terms (Seperated by comma ' , ')">
                     </div>
 
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Price ($)</label>
-                      <input type="number" class="form-control" name="price" placeholder="$500">
+                      <input type="number" class="form-control" required name="price" placeholder="$500">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Discount (%)</label>
-                      <input type="number" step="any" name="discount" value="0" class="form-control" placeholder="5%">
+                      <input type="number" step="any" name="discount" value="0" class="form-control" required placeholder="5%">
                     </div>
                     <div class="col-12 mb-3">
                       <label class="form-label">Description</label>
-                      <textarea name="description" id="" class=" form-control "></textarea>
+                      <textarea name="description" id="" class=" form-control " required></textarea>
                     </div>
                     <div class="col-12 mb-3">
                       <label class="form-label">Product image</label>
-                      <input type="file" name="image" class="form-control">
+                      <input type="file" name="image" class="form-control" required>
                     </div>
                     <div class="col-12 mb-3">
                       <input type="submit" name="add" value="Add Product" class="btn btn-primary">
                     </div>
                   </div>
+                  <!-- Add products -->
+                  <?php
+                  if (isset($_POST["add"])) {
+                    $productid = rand(100000, 999999);
+                    $name = $_POST["name"];
+                    $tags = $_POST["tags"];
+                    $price = $_POST["price"];
+                    $discount = $_POST["discount"];
+                    $description = $_POST["description"];
+                    $image = date("His") . $_FILES["image"]["name"];
+                    $tmp_image = $_FILES["image"]["tmp_name"];
+                    $location = "uploads/" . $image;
+
+
+                    $addProduct = mysqli_query($conn, "INSERT INTO `products` (`productid`, `name`, `tags`, `price`, `discount`, `description`, `image`) 
+                    VALUES ('$productid','$name','$tags','$price','$discount','$description','$image')");
+                    // INSERT INTO `products`(`id`, `productid`, `name`, `tags`, `price`, `discount`, `description`, `image`, `status`, `created_at`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]')
+
+                    if ($addProduct) {
+                      move_uploaded_file($tmp_image, $location);
+                      echo "<script>alert('Successfully added ✅'); location.href='/show-products'</script>";
+                    } else {
+                      echo "<script>alert('An error occured ❌')</script>";
+                    }
+                  }
+                  ?>
                 </form>
               </div>
             </div>

@@ -1,3 +1,21 @@
+<?php
+if (!isset($_SESSION["admin"])) {
+  echo "<script>location.href='/admin-login'</script>";
+}
+
+if (isset($_GET["pid"])) {
+  $productid = $_GET["pid"];
+} else {
+  echo "<script>location.href='/show-products'</script>";
+}
+
+
+$getproducts = mysqli_query($conn, "SELECT * FROM `products` WHERE `productid` = '$productid'");
+if (mysqli_num_rows($getproducts) > 0) {
+  $product = mysqli_fetch_array($getproducts);
+}
+// var_dump($product);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +31,7 @@
   <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <!-- Title -->
-  <title>Add Products</title>
+  <title>Edit Products</title>
 
   <!-- Styles -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&amp;display=swap" rel="stylesheet">
@@ -35,11 +53,11 @@
 </head>
 
 <body>
-  <div class="loader">
+  <!-- <div class="loader">
     <div class="spinner-grow text-primary" role="status">
       <span class="sr-only">Loading...</span>
     </div>
-  </div>
+  </div> -->
 
   <div class="page-container">
     <?php include("theme/components/menu.php"); ?>
@@ -50,37 +68,70 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Add Product</h5>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                   <div class="row">
                     <div class="col-12 mb-3">
                       <label class="form-label">Product Name</label>
-                      <input type="text" name="name" class="form-control" placeholder="Beaded Wall clock ...">
+                      <input type="text" name="name" value="<?= $product["name"]; ?>" class="form-control" placeholder="Beaded Wall clock ...">
                     </div>
                     <div class="col-12 mb-3">
                       <label class="form-label">Tags</label>
-                      <input type="text" name="tags" class="form-control" placeholder="Associated terms (Seperated by comma ' , ')">
+                      <input type="text" name="tags" value="<?= $product["tags"]; ?>" class="form-control" placeholder="Associated terms (Seperated by comma ' , ')">
                     </div>
 
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Price ($)</label>
-                      <input type="number" class="form-control" name="price" placeholder="$500">
+                      <input type="number" class="form-control" name="price" value="<?= $product["price"]; ?>" placeholder="$500">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Discount (%)</label>
-                      <input type="number" step="any" name="discount" value="0" class="form-control" placeholder="5%">
+                      <input type="number" step="any" name="discount" value="<?= $product["discount"]; ?>" value="0" class="form-control" placeholder="5%">
                     </div>
                     <div class="col-12 mb-3">
                       <label class="form-label">Description</label>
-                      <textarea name="description" id="" class=" form-control "></textarea>
+                      <textarea name="description" id="" class=" form-control "><?= $product["description"]; ?></textarea>
                     </div>
                     <div class="col-12 mb-3">
                       <label class="form-label">Product image</label>
                       <input type="file" name="image" class="form-control">
                     </div>
                     <div class="col-12 mb-3">
-                      <input type="submit" name="add" value="Add Product" class="btn btn-primary">
+                      <input type="submit" name="edit" value="Update Product" class="btn btn-primary">
                     </div>
                   </div>
+                  <!-- edit product -->
+                  <?php
+                  if (isset($_POST["edit"])) {
+                    $name = $_POST["name"];
+                    $tags = $_POST["tags"];
+                    $price = $_POST["price"];
+                    $discount = $_POST["discount"];
+                    $description = $_POST["description"];
+                    $image = date("His") . $_FILES["image"]["name"];
+                    $tmp_image = $_FILES["image"]["tmp_name"];
+                    $location = "uploads/" . $image;
+
+
+                    // var_dump($_FILES["image"]["name"] != "");
+                    if ($_FILES["image"]["name"] == "") {
+                      $editProduct = mysqli_query($conn, "UPDATE `products` SET `name`='$name', `tags`='$tags', `price`='$price', `discount`='$discount', `description`='$description' WHERE `productid`='$productid'");
+                      if ($editProduct) {
+                        echo "<script>alert('Successfully updated ✅'); location.href='/show-products'</script>";
+                      } else {
+                        echo "<script>alert('An error occured ❌')</script>";
+                      }
+                    } else {
+                      $editProduct = mysqli_query($conn, "UPDATE `products` SET `name`='$name', `tags`='$tags', `price`='$price', `discount`='$discount', `description`='$description', `image`='$image' WHERE `productid`='$productid'");
+                      if ($editProduct) {
+                        move_uploaded_file($tmp_image, $location);
+                        echo "<script>alert('Successfully updated ✅'); location.href='/show-products'</script>";
+                      } else {
+                        echo "<script>alert('An error occured ❌')</script>";
+                      }
+                    }
+                  }
+                  ?>
+
                 </form>
               </div>
             </div>

@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION["user"])) {
+    echo "<script>location.href='/login'</script>";
+} else {
+    $userid = $_SESSION["user"]["userid"];
+}
+?>
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -85,7 +92,7 @@
         <div class="breadcrumb">
             <div class="container">
                 <ul class="list-unstyled d-flex align-items-center m-0">
-                    <li><a href="https://spreethemesprevious.github.io/">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li>
                         <svg class="icon icon-breadcrumb" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.4">

@@ -3,8 +3,9 @@ if (!isset($_SESSION["admin"])) {
   echo "<script>location.href='/admin-login'</script>";
 }
 
-$getadmin = mysqli_query($conn, "SELECT * FROM `admin`");
-$admin = mysqli_fetch_array($getadmin);
+if (isset($_GET["pid"])) {
+  $productid = $_GET["pid"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +22,7 @@ $admin = mysqli_fetch_array($getadmin);
   <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <!-- Title -->
-  <title>Profile</title>
+  <title>Delete Product</title>
 
   <!-- Styles -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&amp;display=swap" rel="stylesheet">
@@ -57,33 +58,24 @@ $admin = mysqli_fetch_array($getadmin);
           <div class="col">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Admin Profile</h5>
-                <form method="post">
-                  <div class="row">
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Email</label>
-                      <input type="email" value="<?= $admin["email"]; ?>" class="form-control" name="email" placeholder="Email" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Password</label>
-                      <input type="text" value="<?= $admin["password"]; ?>" step="any" name="password" class="form-control" required placeholder="Password">
-                    </div>
-                    <div class="col-12 mb-3">
-                      <input type="submit" name="update" value="Update" class="btn btn-primary">
-                    </div>
-                  </div>
-                  <!-- update admin -->
+                <div class="text-center py-5 px-3">
+                  <h1>❗</h1>
+                  <h3>Are you sure you want to Delete?</h3>
+                  <p>This action cannot be undone.</p>
+                  <form method="post">
+                    <a href="/show-products" class="btn btn-danger">Cancel</a>
+                    <button type="submit" name="delete" class="btn btn-primary">Proceed &gt;&gt;</button>
+                  </form>
+                  <!-- delete -->
                   <?php
-                  if(isset($_POST["update"])){
-                    $email = $_POST["email"];
-                    $password = $_POST["password"];
-                    $update = mysqli_query($conn,"UPDATE `admin` SET `email`='$email', `password`='$password'");
-                    if($update){
-                      echo "<script>alert('Successfully updated ✅'); location.href='/admin-profile'</script>";
+                  if (isset($_POST["delete"])) {
+                    $delete = mysqli_query($conn, "DELETE FROM `products` WHERE `productid`='$productid'");
+                    if ($delete) {
+                      echo "<script>alert('Deleted!');location.href='/show-products'</script>";
                     }
                   }
                   ?>
-                </form>
+                </div>
               </div>
             </div>
           </div>
