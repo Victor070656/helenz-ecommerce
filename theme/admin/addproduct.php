@@ -95,7 +95,7 @@ if (!isset($_SESSION["admin"])) {
                     $price = $_POST["price"];
                     $discount = $_POST["discount"];
                     $description = $_POST["description"];
-                    $image = date("His") . $_FILES["image"]["name"];
+                    $image = date("YmdHis") . $_FILES["image"]["name"];
                     $tmp_image = $_FILES["image"]["tmp_name"];
                     $location = "uploads/" . $image;
 

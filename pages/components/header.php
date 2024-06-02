@@ -38,7 +38,7 @@ if (isset($_SESSION["user"])) {
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId">
                                     <a class="dropdown-item" href="#">Orders</a>
-                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="/user-profile">Profile</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/logout">Logout</a>
                                 </div>
@@ -73,16 +73,16 @@ if (isset($_SESSION["user"])) {
                                     <a class="nav-link" href="/"> Home </a>
                                 </div>
                             </li>
+                            <li class="menu-list-item nav-item <?= parse_url($_SERVER["REQUEST_URI"])["path"] == "/about" ? "active" : ""; ?>">
+                                <div class="mega-menu-header">
+                                    <a class="nav-link" href="/about">About Us</a>
+                                </div>
+                            </li>
                             <li class="menu-list-item nav-item <?= parse_url($_SERVER["REQUEST_URI"])["path"] == "/shop" ? "active" : ""; ?>">
                                 <div class="mega-menu-header">
                                     <a class="nav-link" href="/shop">
                                         Shop
                                     </a>
-                                </div>
-                            </li>
-                            <li class="menu-list-item nav-item <?= parse_url($_SERVER["REQUEST_URI"])["path"] == "/about" ? "active" : ""; ?>">
-                                <div class="mega-menu-header">
-                                    <a class="nav-link" href="/about">About Us</a>
                                 </div>
                             </li>
                             <li class="menu-list-item nav-item <?= parse_url($_SERVER["REQUEST_URI"])["path"] == "/faq" ? "active" : ""; ?>">

@@ -6,6 +6,12 @@
 include_once("config.php");
 session_start();
 
+function dd($data)
+{
+    var_dump($data);
+    die();
+}
+
 $uri_raw = $_SERVER["REQUEST_URI"];
 
 $parsed_uri = parse_url($uri_raw);
@@ -21,12 +27,17 @@ $routes = [
     '/contact' => "pages/contact.php",
     '/cart' => "pages/cart.php",
     '/checkout' => "pages/checkout.php",
+    '/single-checkout' => "pages/checkout2.php",
     '/shop' => "pages/shop.php",
     '/product' => "pages/product.php",
     '/login' => "pages/login.php",
     '/register' => "pages/register.php",
     '/wish' => "pages/wishlist.php",
+    '/addtowish' => "pages/addtowish.php",
+    '/addtocart' => "pages/addtocart.php",
     '/faq' => "pages/faq.php",
+    '/user-profile' => "pages/profile.php",
+    '/test' => "pages/test.php",
 
 
 

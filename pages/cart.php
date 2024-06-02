@@ -4,17 +4,24 @@ if (!isset($_SESSION["user"])) {
 } else {
     $userid = $_SESSION["user"]["userid"];
 }
+
+
+$checkCart = mysqli_query($conn, "SELECT `userid`, `productid`, `quantity` FROM `cart` WHERE `userid` = '$userid' ");
+if (mysqli_num_rows($checkCart) > 0) {
+    $items = mysqli_fetch_all($checkCart, MYSQLI_ASSOC);
+}
+// dd(mysqli_fetch_all($checkCart));
+
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
 
 
-<!-- Mirrored from spreethemesprevious.github.io/bisum/html/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2024 11:37:56 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+
 
 <head>
-    <title>Bisum - eCommerce Bootstrap 5 Template</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+    <title>Helenz | Cart</title>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -122,29 +129,50 @@ if (!isset($_SESSION["user"])) {
                                     </thead>
 
                                     <tbody>
-                                        <tr class="cart-item">
-                                            <td class="cart-item-media">
-                                                <div class="mini-img-wrapper">
-                                                    <img class="mini-img" src="assets/img/products/furniture/1.jpg" alt="img">
-                                                </div>
-                                            </td>
-                                            <td class="cart-item-details">
-                                                <h2 class="product-title"><a href="#">Eliot Reversible Sectional</a></h2>
-                                                <p class="product-vendor">XS / Dove Gray</p>
-                                            </td>
-                                            <td class="cart-item-quantity">
-                                                <div class="quantity d-flex align-items-center justify-content-between">
-                                                    <button class="qty-btn dec-qty"><img src="assets/img/icon/minus.svg" alt="minus"></button>
-                                                    <input class="qty-input" type="number" name="qty" value="1" min="0">
-                                                    <button class="qty-btn inc-qty"><img src="assets/img/icon/plus.svg" alt="plus"></button>
-                                                </div>
-                                                <a href="#" class="product-remove mt-2">Remove</a>
-                                            </td>
-                                            <td class="cart-item-price text-end">
-                                                <div class="product-price">$580.00</div>
-                                            </td>
-                                        </tr>
-                                        <tr class="cart-item">
+                                        <?php
+                                        $subtotal = 0;
+                                        $discount = 0;
+                                        $total = 0;
+                                        foreach ($items as $item) {
+                                            // dd($item);
+                                            $productid = $item["productid"];
+                                            $getProduct = mysqli_query($conn, "SELECT * FROM `products` WHERE `productid` = '$productid'");
+                                            $product = mysqli_fetch_assoc($getProduct);
+
+
+                                            $diff = $product["price"] - ($product["price"] * ($product["discount"] / 100));
+                                            $d = $product["price"] - $diff;
+
+                                            $subtotal += $diff;
+                                            $discount += $d;
+                                            $total += $product["price"];
+                                        ?>
+
+                                            <tr class="cart-item">
+                                                <td class="cart-item-media">
+                                                    <div class="mini-img-wrapper">
+                                                        <img class="mini-img" src="uploads/<?= $product["image"]; ?>" alt="img">
+                                                    </div>
+                                                </td>
+                                                <td class="cart-item-details">
+                                                    <h2 class="product-title"><a href="#">Eliot Reversible Sectional</a></h2>
+                                                    <p class="product-vendor">XS / Dove Gray</p>
+                                                </td>
+                                                <td class="cart-item-quantity">
+
+                                                    <a href="#" class="product-remove mt-2">Remove</a>
+                                                </td>
+                                                <td class="cart-item-price text-end">
+                                                    <div class="product-price">$<?= $diff; ?></div>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+
+
+
+                                        <!-- <tr class="cart-item">
                                             <td class="cart-item-media">
                                                 <div class="mini-img-wrapper">
                                                     <img class="mini-img" src="assets/img/products/furniture/2.jpg" alt="img">
@@ -155,11 +183,7 @@ if (!isset($_SESSION["user"])) {
                                                 <p class="product-vendor">XS / Pink</p>
                                             </td>
                                             <td class="cart-item-quantity">
-                                                <div class="quantity d-flex align-items-center justify-content-between">
-                                                    <button class="qty-btn dec-qty"><img src="assets/img/icon/minus.svg" alt="minus"></button>
-                                                    <input class="qty-input" type="number" name="qty" value="1" min="0">
-                                                    <button class="qty-btn inc-qty"><img src="assets/img/icon/plus.svg" alt="plus"></button>
-                                                </div>
+
                                                 <a href="#" class="product-remove mt-2">Remove</a>
                                             </td>
                                             <td class="cart-item-price text-end">
@@ -177,11 +201,7 @@ if (!isset($_SESSION["user"])) {
                                                 <p class="product-vendor">XS / Dove Gray</p>
                                             </td>
                                             <td class="cart-item-quantity">
-                                                <div class="quantity d-flex align-items-center justify-content-between">
-                                                    <button class="qty-btn dec-qty"><img src="assets/img/icon/minus.svg" alt="minus"></button>
-                                                    <input class="qty-input" type="number" name="qty" value="1" min="0">
-                                                    <button class="qty-btn inc-qty"><img src="assets/img/icon/plus.svg" alt="plus"></button>
-                                                </div>
+
                                                 <a href="#" class="product-remove mt-2">Remove</a>
                                             </td>
                                             <td class="cart-item-price text-end">
@@ -199,17 +219,13 @@ if (!isset($_SESSION["user"])) {
                                                 <p class="product-vendor">XS / Dove Gray</p>
                                             </td>
                                             <td class="cart-item-quantity">
-                                                <div class="quantity d-flex align-items-center justify-content-between">
-                                                    <button class="qty-btn dec-qty"><img src="assets/img/icon/minus.svg" alt="minus"></button>
-                                                    <input class="qty-input" type="number" name="qty" value="1" min="0">
-                                                    <button class="qty-btn inc-qty"><img src="assets/img/icon/plus.svg" alt="plus"></button>
-                                                </div>
+
                                                 <a href="#" class="product-remove mt-2">Remove</a>
                                             </td>
                                             <td class="cart-item-price text-end">
                                                 <div class="product-price">$580.00</div>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -218,17 +234,22 @@ if (!isset($_SESSION["user"])) {
                                     <h3 class="cart-total-title d-none d-lg-block mb-0">Cart Totals</h4>
                                         <div class="cart-total-box mt-4">
                                             <div class="subtotal-item subtotal-box">
+                                                <h4 class="subtotal-title">Amount:</h4>
+                                                <p class="subtotal-value">$<?= $total; ?></p>
+                                            </div>
+                                            <div class="subtotal-item subtotal-box">
                                                 <h4 class="subtotal-title">Subtotals:</h4>
-                                                <p class="subtotal-value">$465.00</p>
+                                                <p class="subtotal-value">$<?= $subtotal; ?></p>
+                                            </div>
+                                            <div class="subtotal-item discount-box">
+                                                <h4 class="subtotal-title">Discount:</h4>
+                                                <p class="subtotal-value">$<?= $discount; ?></p>
                                             </div>
                                             <div class="subtotal-item shipping-box">
                                                 <h4 class="subtotal-title">Shipping:</h4>
                                                 <p class="subtotal-value">$10.00</p>
                                             </div>
-                                            <div class="subtotal-item discount-box">
-                                                <h4 class="subtotal-title">Discount:</h4>
-                                                <p class="subtotal-value">$100.00</p>
-                                            </div>
+
                                             <hr />
                                             <div class="subtotal-item discount-box">
                                                 <h4 class="subtotal-title">Total:</h4>

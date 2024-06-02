@@ -217,422 +217,74 @@
               <h2 class="section-heading">Popular Products</h2>
             </div>
             <div class="row">
-              <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/9.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/1.jpg" alt="product-img" />
-                    </a>
+              <?php
+              $a = ["DESC", "ASC"];
+              $i = rand(0, 1);
+              $o = $a[$i];
+              $getPopularProducts = mysqli_query($conn, "SELECT * FROM `products` ORDER BY `productid` $o LIMIT 8");
 
-                    <div class="product-badge">
-                      <span class="badge-label badge-new rounded">Featured</span>
-                      <span class="badge-label badge-percentage rounded">-44%</span>
-                    </div>
+              if (mysqli_num_rows($getPopularProducts) > 0) :
+                while ($popular = mysqli_fetch_assoc($getPopularProducts)) :
+                  $discount;
+                  if ($popular["discount"] > 0) {
+                    $discount = $popular["price"] - ($popular["price"] * ($popular["discount"] / 100));
+                  }
 
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
 
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
+              ?>
+                  <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
+                    <div class="product-card shadow-sm">
+                      <div class="product-card-img">
+                        <a class="hover-switch" href="/product?pid=<?= $popular["productid"]; ?>">
+                          <img class="primary-img" src="uploads/<?= $popular["image"]; ?>" style="height: 320px; width: 100%; object-fit: contain; background-color: #fff; " alt="product-img" />
+                        </a>
 
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">Best trucker</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/10.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/2.jpg" alt="product-img" />
-                    </a>
+                        <div class="product-badge">
+                          <!-- <span class="badge-label badge-new rounded">Featured</span>
+                      <span class="badge-label badge-percentage rounded">-44%</span> -->
+                        </div>
 
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
+                        <div class="product-card-action product-card-action-2 justify-content-center">
 
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
 
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
+                          <a href="/addtowish?pid=<?= $popular["productid"]; ?>" class="action-card action-wishlist">
+                            <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
+                            </svg>
+                          </a>
+
+                          <a href="/addtocart?pid=<?= $popular["productid"]; ?>" class="action-card action-addtocart">
+                            <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="product-card-details px-2 pb-2">
+
+                        <h3 class="product-card-title text-truncate ">
+                          <a class="" href="/product?pid=<?= $popular["productid"]; ?>"><?= $popular["name"]; ?></a>
+                        </h3>
+                        <?php if ($popular["discount"] > 0) : ?>
+                          <div class="product-card-price">
+                            <span class="card-price-regular">$<?= $discount; ?></span>
+                            <span class="card-price-compare text-decoration-line-through">$<?= $popular["price"]; ?></span>
+                          </div>
+                        <?php else : ?>
+                          <div class="product-card-price">
+                            <span class="card-price-regular">$<?= $popular["price"]; ?></span>
+                          </div>
+                        <?php endif; ?>
+                      </div>
                     </div>
                   </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">Formal Shoe</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/11.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/3.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-badge">
-                      <span class="badge-label badge-new rounded">New</span>
-                    </div>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">kate spade</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/14.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/4.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">new arrivals</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/15.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/5.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">unisex canva</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/16.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/6.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-badge">
-                      <span class="badge-label badge-percentage rounded">-44%</span>
-                    </div>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">plus suede</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/17.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/7.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">fat lace</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/19.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/8.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">red classic</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <?php
+                endwhile;
+              endif;
+              ?>
             </div>
             <div class="view-all text-center" data-aos="fade-up" data-aos-duration="700">
-              <a class="btn-primary" href="#">VIEW ALL</a>
+              <a class="btn-primary" href="/shop">VIEW ALL</a>
             </div>
           </div>
         </div>
@@ -688,392 +340,72 @@
             <h2 class="section-heading">The Latest Drop</h2>
           </div>
 
-          <div class="product-container position-relative">
-            <div class="common-slider" data-slick='{
-                        "slidesToShow": 4, 
-                        "slidesToScroll": 1,
-                        "dots": false,
-                        "arrows": true,
-                        "responsive": [
-                          {
-                            "breakpoint": 1281,
-                            "settings": {
-                              "slidesToShow": 3
-                            }
-                          },
-                          {
-                            "breakpoint": 768,
-                            "settings": {
-                              "slidesToShow": 2
-                            }
-                          }
-                        ]
-                    }'>
-              <div class="new-item" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/1.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/20.jpg" alt="product-img" />
-                    </a>
+          <div class="row">
+            <?php
+            $getPopularProducts = mysqli_query($conn, "SELECT * FROM `products` ORDER BY `id` DESC LIMIT 4");
 
-                    <div class="product-badge">
-                      <span class="badge-label badge-new rounded">New</span>
-                      <span class="badge-label badge-percentage rounded">-44%</span>
+            if (mysqli_num_rows($getPopularProducts) > 0) :
+              while ($popular = mysqli_fetch_assoc($getPopularProducts)) :
+                $discount;
+                if ($popular["discount"] > 0) {
+                  $discount = $popular["price"] - ($popular["price"] * ($popular["discount"] / 100));
+                }
+
+
+            ?>
+                <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
+                  <div class="product-card shadow-sm">
+                    <div class="product-card-img">
+                      <a class="hover-switch" href="/product?pid=<?= $popular["productid"]; ?>">
+                        <img class="primary-img" src="uploads/<?= $popular["image"]; ?>" style="height: 320px; width: 100%; object-fit: contain; background-color: #fff; " alt="product-img" />
+                      </a>
+
+                      <div class="product-badge">
+                        <!-- <span class="badge-label badge-new rounded">Featured</span>
+                      <span class="badge-label badge-percentage rounded">-44%</span> -->
+                      </div>
+
+                      <div class="product-card-action product-card-action-2 justify-content-center">
+
+
+                        <a href="/addtowish?pid=<?= $popular["productid"]; ?>" class="action-card action-wishlist">
+                          <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
+                          </svg>
+                        </a>
+
+                        <a href="/addtocart?pid=<?= $popular["productid"]; ?>" class="action-card action-addtocart">
+                          <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
+                    <div class="product-card-details px-2 pb-2">
 
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">white keds</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
+                      <h3 class="product-card-title text-truncate">
+                        <a class="" href="/product?pid=<?= $popular["productid"]; ?>"><?= $popular["name"]; ?></a>
+                      </h3>
+                      <?php if ($popular["discount"] > 0) : ?>
+                        <div class="product-card-price">
+                          <span class="card-price-regular">$<?= $discount; ?></span>
+                          <span class="card-price-compare text-decoration-line-through">$<?= $popular["price"]; ?></span>
+                        </div>
+                      <?php else : ?>
+                        <div class="product-card-price">
+                          <span class="card-price-regular">$<?= $popular["price"]; ?></span>
+                        </div>
+                      <?php endif; ?>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="new-item" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/10.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/21.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">baby style</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="new-item" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/7.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/17.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-badge">
-                      <span class="badge-label badge-new rounded">New</span>
-                    </div>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">black leather</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="new-item" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/2.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/22.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-badge">
-                      <span class="badge-label badge-percentage rounded">-44%</span>
-                    </div>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">black shoe</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="new-item" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/3.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/23.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">super suede</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="new-item" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/4.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/24.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">men shoe</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="new-item" data-aos="fade-up" data-aos-duration="700">
-                <div class="product-card">
-                  <div class="product-card-img">
-                    <a class="hover-switch" href="collection-left-sidebar.html">
-                      <img class="secondary-img" src="assets/img/products/shoe/5.jpg" alt="product-img" />
-                      <img class="primary-img" src="assets/img/products/shoe/25.jpg" alt="product-img" />
-                    </a>
-
-                    <div class="product-card-action product-card-action-2 justify-content-center">
-                      <a href="#quickview-modal" class="action-card action-quickview" data-bs-toggle="modal">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-wishlist">
-                        <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D" />
-                        </svg>
-                      </a>
-
-                      <a href="#" class="action-card action-addtocart">
-                        <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="#00234D" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-card-details">
-                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-black active"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                      </li>
-                    </ul>
-                    <h3 class="product-card-title">
-                      <a href="collection-left-sidebar.html">stick shoe</a>
-                    </h3>
-                    <div class="product-card-price">
-                      <span class="card-price-regular">$1529</span>
-                      <span class="card-price-compare text-decoration-line-through">$1759</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="activate-arrows show-arrows-always article-arrows arrows-white"></div>
+            <?php
+              endwhile;
+            endif;
+            ?>
+          </div>
+          <div class="view-all text-center" data-aos="fade-up" data-aos-duration="700">
+            <a class="btn-primary" href="/shop">VIEW ALL</a>
           </div>
         </div>
       </div>
@@ -1088,10 +420,10 @@
             <div class="container height-inherit d-flex align-items-center">
               <div class="content-box single-banner-content py-4">
                 <h2 class="single-banner-heading heading_42 text-white animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
-                  Climb up to the mountain with NIK
+                  Climb up to the mountain with Helenz Footwear
                 </h2>
                 <p class="single-banner-text text_16 text-white animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
-                  Free shipping, and no hassle returns. NIK Running shoes for
+                  Free shipping, and no hassle returns. Helenz Footwear Running shoes for
                   men & women
                 </p>
                 <a class="btn-primary single-banner-btn animate__animated animate__fadeInUp" href="collection-left-sidebar.html" data-animation="animate__animated animate__fadeInUp">
@@ -1234,48 +566,7 @@
       </div>
       <!-- newsletter end -->
 
-      <!-- brand logo start -->
-      <div class="brand-logo-section mt-100">
-        <div class="brand-logo-inner">
-          <div class="container">
-            <div class="brand-logo-container overflow-hidden">
-              <div class="scroll-horizontal row align-items-center flex-nowrap">
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                  <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                    <img src="assets/img/brand/1.png" alt="img" />
-                  </a>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                  <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                    <img src="assets/img/brand/2.png" alt="img" />
-                  </a>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                  <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                    <img src="assets/img/brand/3.png" alt="img" />
-                  </a>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                  <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                    <img src="assets/img/brand/4.png" alt="img" />
-                  </a>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                  <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                    <img src="assets/img/brand/5.png" alt="img" />
-                  </a>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                  <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                    <img src="assets/img/brand/6.png" alt="img" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- brand logo end -->
+
     </main>
 
     <!-- include footer -->

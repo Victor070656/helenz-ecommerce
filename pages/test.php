@@ -1,13 +1,21 @@
+<?php
+
+if (!isset($_SESSION["user"])) {
+    echo "<script>location.href='/login'</script>";
+} else {
+    $userid = $_SESSION["user"]["userid"];
+}
+?>
 <!doctype html>
 <html lang="en" class="no-js">
 
 
-<!-- Mirrored from spreethemesprevious.github.io/bisum/html/404.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2024 11:37:56 GMT -->
+<!-- Mirrored from spreethemesprevious.github.io/bisum/html/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2024 11:37:56 GMT -->
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Bisum - eCommerce Bootstrap 5 Template</title>
+    <title>Test</title>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -80,7 +88,6 @@
         ?>
         <!-- include header.php end -->
 
-
         <!-- breadcrumb start -->
         <div class="breadcrumb">
             <div class="container">
@@ -93,32 +100,94 @@
                             </g>
                         </svg>
                     </li>
-                    <li>404</li>
+                    <li>Test</li>
                 </ul>
             </div>
         </div>
         <!-- breadcrumb end -->
 
         <main id="MainContent" class="content-for-layout">
-            <div class="error-page mt-100">
+            <div class="cart-page mt-100">
                 <div class="container">
-                    <div class="error-content text-center">
-                        <div class="error-img mx-auto">
-                            <img src="assets/img/error/error.png" alt="error">
-                        </div>
-                        <p class="error-subtitle">Page Not Found</p>
-                        <a href="/" class="btn-primary mt-4">BACK TO HOMEPAGE</a>
+                    <div class="cart-page-wrapper">
+                        <table class="table table-hoverable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <th>Phone Number</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $getUser = "SELECT * FROM `users` WHERE `userid` = '$userid'";
+                                $run = mysqli_query($conn, $getUser);
+
+                                if (mysqli_num_rows($run) > 0) {
+                                    $user = mysqli_fetch_array($run);
+
+                                ?>
+
+
+                                    <tr>
+                                        <td><?php echo $user["userid"]; ?></td>
+                                        <td><?php echo $user["firstname"]; ?></td>
+                                        <td><?php echo $user["lastname"]; ?></td>
+                                        <td><?php echo $user["phone"]; ?></td>
+                                        <td><?php echo $user["email"]; ?></td>
+                                    </tr>
+
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                        <table class="table table-hoverable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <th>Phone Number</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $getUser = "SELECT * FROM `users`";
+                                $run = mysqli_query($conn, $getUser);
+
+                                if (mysqli_num_rows($run) > 0) {
+                                    while($user = mysqli_fetch_array($run)){
+                                       
+                                ?>
+
+
+                                    <tr>
+                                        <td><?php echo $user["userid"]; ?></td>
+                                        <td><?php echo $user["firstname"]; ?></td>
+                                        <td><?php echo $user["lastname"]; ?></td>
+                                        <td><?php echo $user["phone"]; ?></td>
+                                        <td><?php echo $user["email"]; ?></td>
+                                    </tr>
+
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </main>
-
         <!-- include footer -->
         <?php
         include("components/footer.php");
         ?>
         <!-- include footer end -->
-
 
 
         <!-- all js -->
@@ -128,6 +197,6 @@
 </body>
 
 
-<!-- Mirrored from spreethemesprevious.github.io/bisum/html/404.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2024 11:37:56 GMT -->
+<!-- Mirrored from spreethemesprevious.github.io/bisum/html/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2024 11:37:56 GMT -->
 
 </html>
