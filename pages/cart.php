@@ -4,13 +4,13 @@ if (!isset($_SESSION["user"])) {
 } else {
     $userid = $_SESSION["user"]["userid"];
 }
-
+global $conn;
 
 $checkCart = mysqli_query($conn, "SELECT `userid`, `productid`, `quantity` FROM `cart` WHERE `userid` = '$userid' ");
 if (mysqli_num_rows($checkCart) > 0) {
     $items = mysqli_fetch_all($checkCart, MYSQLI_ASSOC);
 }
-// dd(mysqli_fetch_all($checkCart));
+// dd($items);
 
 ?>
 <!doctype html>
@@ -115,6 +115,9 @@ if (mysqli_num_rows($checkCart) > 0) {
         <main id="MainContent" class="content-for-layout">
             <div class="cart-page mt-100">
                 <div class="container">
+                    <?php
+                    if (mysqli_num_rows($checkCart) > 0) {
+                    ?>
                     <div class="cart-page-wrapper">
                         <div class="row">
                             <div class="col-lg-7 col-md-12 col-12">
@@ -133,6 +136,8 @@ if (mysqli_num_rows($checkCart) > 0) {
                                         $subtotal = 0;
                                         $discount = 0;
                                         $total = 0;
+                                        $shipping = 0;
+                                        $payment_total = 0;
                                         foreach ($items as $item) {
                                             // dd($item);
                                             $productid = $item["productid"];
@@ -168,70 +173,23 @@ if (mysqli_num_rows($checkCart) > 0) {
                                             </tr>
                                         <?php
                                         }
+
+                                        if($total <= 1000){
+                                            $shipping = $total * 0.1;
+                                        }elseif ($total <= 5000){
+                                            $shipping = $total * 0.15;
+                                        }else{
+                                            $shipping = $total * 0.25;
+                                        }
+                                        $payment_total = $subtotal + $shipping;
                                         ?>
 
-
-
-                                        <!-- <tr class="cart-item">
-                                            <td class="cart-item-media">
-                                                <div class="mini-img-wrapper">
-                                                    <img class="mini-img" src="assets/img/products/furniture/2.jpg" alt="img">
-                                                </div>
-                                            </td>
-                                            <td class="cart-item-details">
-                                                <h2 class="product-title"><a href="#">Vita Lounge Chair</a></h2>
-                                                <p class="product-vendor">XS / Pink</p>
-                                            </td>
-                                            <td class="cart-item-quantity">
-
-                                                <a href="#" class="product-remove mt-2">Remove</a>
-                                            </td>
-                                            <td class="cart-item-price text-end">
-                                                <div class="product-price">$580.00</div>
-                                            </td>
-                                        </tr>
-                                        <tr class="cart-item">
-                                            <td class="cart-item-media">
-                                                <div class="mini-img-wrapper">
-                                                    <img class="mini-img" src="assets/img/products/furniture/3.jpg" alt="img">
-                                                </div>
-                                            </td>
-                                            <td class="cart-item-details">
-                                                <h2 class="product-title"><a href="#">Sarno Dining Chair</a></h2>
-                                                <p class="product-vendor">XS / Dove Gray</p>
-                                            </td>
-                                            <td class="cart-item-quantity">
-
-                                                <a href="#" class="product-remove mt-2">Remove</a>
-                                            </td>
-                                            <td class="cart-item-price text-end">
-                                                <div class="product-price">$580.00</div>
-                                            </td>
-                                        </tr>
-                                        <tr class="cart-item">
-                                            <td class="cart-item-media">
-                                                <div class="mini-img-wrapper">
-                                                    <img class="mini-img" src="assets/img/products/furniture/4.jpg" alt="img">
-                                                </div>
-                                            </td>
-                                            <td class="cart-item-details">
-                                                <h2 class="product-title"><a href="#">Eliot Reversible Sectional</a></h2>
-                                                <p class="product-vendor">XS / Dove Gray</p>
-                                            </td>
-                                            <td class="cart-item-quantity">
-
-                                                <a href="#" class="product-remove mt-2">Remove</a>
-                                            </td>
-                                            <td class="cart-item-price text-end">
-                                                <div class="product-price">$580.00</div>
-                                            </td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
                             <div class="col-lg-5 col-md-12 col-12">
                                 <div class="cart-total-area">
-                                    <h3 class="cart-total-title d-none d-lg-block mb-0">Cart Totals</h4>
+                                    <h3 class="cart-total-title d-none d-lg-block mb-0">Cart Totals</h3>
                                         <div class="cart-total-box mt-4">
                                             <div class="subtotal-item subtotal-box">
                                                 <h4 class="subtotal-title">Amount:</h4>
@@ -247,25 +205,47 @@ if (mysqli_num_rows($checkCart) > 0) {
                                             </div>
                                             <div class="subtotal-item shipping-box">
                                                 <h4 class="subtotal-title">Shipping:</h4>
-                                                <p class="subtotal-value">$10.00</p>
+                                                <p class="subtotal-value">$<?= $shipping;?></p>
                                             </div>
 
                                             <hr />
                                             <div class="subtotal-item discount-box">
                                                 <h4 class="subtotal-title">Total:</h4>
-                                                <p class="subtotal-value">$1000.00</p>
+                                                <p class="subtotal-value">$<?= $payment_total ;?></p>
                                             </div>
                                             <p class="shipping_text">Shipping & taxes calculated at checkout</p>
                                             <div class="d-flex justify-content-center mt-4">
-                                                <a href="checkout.html" class="position-relative btn-primary text-uppercase">
-                                                    Procced to checkout
-                                                </a>
+
+                                                <form method="post" action="/checkout">
+                                                    <?php
+                                                    $a = "";
+                                                    $a = json_encode($items);
+                                                    ?>
+                                                    <textarea name="items" hidden="hidden"><?=$a;?></textarea>
+                                                    <input type="hidden" name="amount" value="<?=$payment_total;?>" >
+                                                    <input type="submit" value="Proceed to checkout" class="position-relative btn-primary text-uppercase" >
+                                                </form>
+
                                             </div>
                                         </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php
+                    }else{
+                        ?>
+                    <div class="card" style="border-radius: 15px">
+                        <div class="card-body d-flex justify-content-center" style="min-height: 200px; ">
+                            <div class="my-auto text-center">
+                                <h1 class="text-center">No Item in Cart 🛒</h1>
+                                <a href="/shop" class="btn btn-primary">Continue Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </main>

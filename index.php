@@ -4,11 +4,14 @@
 // var_dump(PHP_URL_QUERY);
 
 include_once("config.php");
+include_once("paystack_config.php");
 session_start();
 
 function dd($data)
 {
+    echo "<pre>";
     var_dump($data);
+    echo "</pre>";
     die();
 }
 
@@ -27,6 +30,7 @@ $routes = [
     '/contact' => "pages/contact.php",
     '/cart' => "pages/cart.php",
     '/checkout' => "pages/checkout.php",
+    '/pay' => "pages/pay.php",
     '/single-checkout' => "pages/checkout2.php",
     '/shop' => "pages/shop.php",
     '/product' => "pages/product.php",
@@ -38,6 +42,7 @@ $routes = [
     '/faq' => "pages/faq.php",
     '/user-profile' => "pages/profile.php",
     '/test' => "pages/test.php",
+    '/action' => "pages/action.php",
 
 
 

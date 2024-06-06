@@ -1,8 +1,44 @@
 <?php
+global $conn;
 if (!isset($_SESSION["user"])) {
     echo "<script>location.href='/login'</script>";
 } else {
     $userid = $_SESSION["user"]["userid"];
+}
+//dd($_POST);
+if ($_POST){
+    $info = $_POST;
+}else{
+    echo "<script>location.href='/cart'</script>";
+}
+$items = json_decode($info["items"], true);
+$amount = $info["amount"];
+//dd($items);
+
+$subtotal = 0;
+$discount = 0;
+$total = 0;
+$shipping = 0;
+foreach ($items as $item) {
+// dd($item);
+    $productid = $item["productid"];
+    $getProduct = mysqli_query($conn, "SELECT * FROM `products` WHERE `productid` = '$productid'");
+    $product = mysqli_fetch_assoc($getProduct);
+
+
+    $diff = $product["price"] - ($product["price"] * ($product["discount"] / 100));
+    $d = $product["price"] - $diff;
+
+    $subtotal += $diff;
+    $discount += $d;
+    $total += $product["price"];
+}
+if($total <= 1000){
+    $shipping = $total * 0.1;
+}elseif ($total <= 5000){
+    $shipping = $total * 0.15;
+}else{
+    $shipping = $total * 0.25;
 }
 ?>
 <!doctype html>
@@ -118,204 +154,133 @@ if (!isset($_SESSION["user"])) {
             <div class="checkout-page mt-100">
                 <div class="container">
                     <div class="checkout-page-wrapper">
-                        <div class="row">
-                            <div class="col-xl-9 col-lg-8 col-md-12 col-12">
-                                <div class="section-header mb-3">
-                                    <h2 class="section-heading">Check out</h2>
-                                </div>
-
-                                <div class="checkout-progress overflow-hidden">
-                                    <ol class="checkout-bar px-0">
-                                        <li class="progress-step step-done"><a href="cart.html">Cart</a></li>
-                                        <li class="progress-step step-active"><a href="checkout.html">Your Details</a></li>
-                                        <li class="progress-step step-todo"><a href="checkout.html">Shipping</a></li>
-                                        <li class="progress-step step-todo"><a href="checkout.html">Payment</a></li>
-                                        <li class="progress-step step-todo"><a href="checkout.html">Review</a></li>
-                                    </ol>
-                                </div>
-
-                                <div class="checkout-user-area overflow-hidden d-flex align-items-center">
-                                    <div class="checkout-user-img me-4">
-                                        <img src="assets/img/checkout/user.jpg" alt="img">
+                        <form method="post" action="/pay">
+                            <div class="row">
+                                <div class="col-xl-9 col-lg-8 col-md-12 col-12">
+                                    <div class="section-header mb-3">
+                                        <h2 class="section-heading">Check out</h2>
                                     </div>
-                                    <div class="checkout-user-details d-flex align-items-center justify-content-between w-100">
-                                        <div class="checkout-user-info">
-                                            <h2 class="checkout-user-name">Susan Gardner</h2>
-                                            <p class="checkout-user-address mb-0">2752 avenue Royale, Quebec, G1R 2B2, Canada</p>
-                                        </div>
 
-                                        <a href="#" class="edit-user btn-secondary">EDIT PROFILE</a>
-                                    </div>
-                                </div>
+                                    <div class="shipping-address-area">
+                                        <h2 class="shipping-address-heading pb-1">Shipping address</h2>
+                                        <div class="shipping-address-form-wrapper">
+                                            <div class="shipping-address-form common-form">
+                                                <div class="row">
+                                                    <textarea name="items" hidden="hidden"><?=$info["items"];?></textarea>
+                                                    <input type="hidden" name="amount" value="<?=$info["amount"];?>"/>
+                                                    <div class="col-lg-6 col-md-12 col-12">
+                                                        <fieldset>
+                                                            <label class="label">First name
+                                                                <input type="text" name="first-name" required />
+                                                            </label>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-12">
+                                                        <fieldset>
+                                                            <label class="label">Last name
+                                                                <input type="text" name="last-name" required />
+                                                            </label>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-12">
+                                                        <fieldset>
+                                                            <label class="label">Email address
+                                                                <input type="email" name="email" required />
+                                                            </label>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-12">
+                                                        <fieldset>
+                                                            <label class="label">Phone number
+                                                                <input type="text" name="phone" required />
+                                                            </label>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-12">
+                                                        <fieldset>
+                                                            <label class="label">Country
+                                                                <input type="text" name="country" required />
+                                                            </label>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-12">
+                                                        <fieldset>
+                                                            <label class="label">City
+                                                                <input type="text" name="city" required />
+                                                            </label>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-12">
+                                                        <fieldset>
+                                                            <label class="label">Zip code
+                                                                <input type="text" name="zip" required />
+                                                            </label>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-12">
+                                                        <fieldset>
+                                                            <label class="label">Address 1
+                                                                <input type="text" name="addr1" required />
+                                                            </label>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-12">
+                                                        <fieldset>
+                                                            <label class="label">Address 2
+                                                                <input type="text" name="addr2" />
+                                                            </label>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
 
-                                <div class="shipping-address-area">
-                                    <h2 class="shipping-address-heading pb-1">Shipping address</h2>
-                                    <div class="shipping-address-form-wrapper">
-                                        <form action="#" class="shipping-address-form common-form">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <fieldset>
-                                                        <label class="label">First name</label>
-                                                        <input type="text" />
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <fieldset>
-                                                        <label class="label">Last name</label>
-                                                        <input type="text" />
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <fieldset>
-                                                        <label class="label">Email address</label>
-                                                        <input type="email" />
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <fieldset>
-                                                        <label class="label">Phone number</label>
-                                                        <input type="text" />
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <fieldset>
-                                                        <label class="label">Company</label>
-                                                        <input type="text" />
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <fieldset>
-                                                        <label class="label">Country</label>
-                                                        <select class="form-select">
-                                                            <option selected="ca">Canada</option>
-                                                            <option value="us">USA</option>
-                                                            <option value="au">Australia</option>
-                                                            <option value="me">Mexico</option>
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <fieldset>
-                                                        <label class="label">City</label>
-                                                        <select class="form-select">
-                                                            <option selected="ca">Toronto</option>
-                                                            <option value="us">Quebec</option>
-                                                            <option value="au">Windsor</option>
-                                                            <option value="me">Calgary</option>
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <fieldset>
-                                                        <label class="label">Zip code</label>
-                                                        <input type="text" />
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <fieldset>
-                                                        <label class="label">Address 1</label>
-                                                        <input type="text" />
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <fieldset>
-                                                        <label class="label">Address 2</label>
-                                                        <input type="text" />
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="shipping-address-area billing-area">
-                                    <h2 class="shipping-address-heading pb-1">Billing address</h2>
-                                    <div class="form-checkbox d-flex align-items-center mt-4">
-                                        <input class="form-check-input mt-0" type="checkbox">
-                                        <label class="form-check-label ms-2">
-                                            Same as shipping address
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="shipping-address-area billing-area">
-                                    <div class="minicart-btn-area d-flex align-items-center justify-content-between flex-wrap">
-                                        <a href="cart.html" class="checkout-page-btn minicart-btn btn-secondary">BACK TO CART</a>
-                                        <a href="checkout.html" class="checkout-page-btn minicart-btn btn-primary">PROCEED TO SHIPPING</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-12 col-12">
-                                <div class="cart-total-area checkout-summary-area">
-                                    <h3 class="d-none d-lg-block mb-0 text-center heading_24 mb-4">Order summary</h4>
-
-                                        <div class="minicart-item d-flex">
-                                            <div class="mini-img-wrapper">
-                                                <img class="mini-img" src="assets/img/products/furniture/1.jpg" alt="img">
-                                            </div>
-                                            <div class="product-info">
-                                                <h2 class="product-title"><a href="#">Eliot Reversible Sectional</a></h2>
-                                                <p class="product-vendor">$150 x 1</p>
                                             </div>
                                         </div>
-                                        <div class="minicart-item d-flex">
-                                            <div class="mini-img-wrapper">
-                                                <img class="mini-img" src="assets/img/products/furniture/2.jpg" alt="img">
-                                            </div>
-                                            <div class="product-info">
-                                                <h2 class="product-title"><a href="#">Eliot Reversible Sectional</a></h2>
-                                                <p class="product-vendor">$150 x 1</p>
-                                            </div>
-                                        </div>
-                                        <div class="minicart-item d-flex">
-                                            <div class="mini-img-wrapper">
-                                                <img class="mini-img" src="assets/img/products/furniture/3.jpg" alt="img">
-                                            </div>
-                                            <div class="product-info">
-                                                <h2 class="product-title"><a href="#">Eliot Reversible Sectional</a></h2>
-                                                <p class="product-vendor">$150 x 1</p>
-                                            </div>
-                                        </div>
-                                        <div class="minicart-item d-flex">
-                                            <div class="mini-img-wrapper">
-                                                <img class="mini-img" src="assets/img/products/furniture/4.jpg" alt="img">
-                                            </div>
-                                            <div class="product-info">
-                                                <h2 class="product-title"><a href="#">Eliot Reversible Sectional</a></h2>
-                                                <p class="product-vendor">$150 x 1</p>
-                                            </div>
-                                        </div>
+                                    </div>
 
-                                        <div class="cart-total-box mt-4 bg-transparent p-0">
+                                </div>
+                                <div class="col-xl-3 col-lg-4 col-md-12 col-12">
+                                    <div class="cart-total-area checkout-summary-area">
+                                        <h3 class="d-none d-lg-block mb-0 text-center heading_24 mb-4">Order summary</h3>
+
+                                        <div class="cart-total-box mt-4">
+                                            <div class="subtotal-item subtotal-box">
+                                                <h4 class="subtotal-title">Amount:</h4>
+                                                <p class="subtotal-value">$<?= $total; ?></p>
+                                            </div>
                                             <div class="subtotal-item subtotal-box">
                                                 <h4 class="subtotal-title">Subtotals:</h4>
-                                                <p class="subtotal-value">$465.00</p>
-                                            </div>
-                                            <div class="subtotal-item shipping-box">
-                                                <h4 class="subtotal-title">Shipping:</h4>
-                                                <p class="subtotal-value">$10.00</p>
+                                                <p class="subtotal-value">$<?= $subtotal; ?></p>
                                             </div>
                                             <div class="subtotal-item discount-box">
                                                 <h4 class="subtotal-title">Discount:</h4>
-                                                <p class="subtotal-value">$100.00</p>
+                                                <p class="subtotal-value">$<?= $discount; ?></p>
                                             </div>
+                                            <div class="subtotal-item shipping-box">
+                                                <h4 class="subtotal-title">Shipping:</h4>
+                                                <p class="subtotal-value">$<?= $shipping;?></p>
+                                            </div>
+
                                             <hr />
                                             <div class="subtotal-item discount-box">
                                                 <h4 class="subtotal-title">Total:</h4>
-                                                <p class="subtotal-value">$1000.00</p>
+                                                <p class="subtotal-value">$<?= $amount ;?></p>
                                             </div>
+                                            <p class="shipping_text">Shipping & taxes calculated at checkout</p>
+                                            <div class="d-flex justify-content-center mt-4">
 
+                                                <?php
+                                                $a = "";
+                                                $a = json_encode($items);
+                                                ?>
 
-                                            <div class="mt-4 checkout-promo-code">
-                                                <input class="input-promo-code" type="text" placeholder="Promo code" />
-                                                <a href="checkout.html" class="btn-apply-code position-relative btn-secondary text-uppercase mt-3">
-                                                    Apply Promo Code
-                                                </a>
+                                                <input type="submit" value="Proceed to Pay" class="position-relative btn-primary text-uppercase" >
+
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
