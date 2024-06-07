@@ -3,6 +3,9 @@
 global $conn;
 $getProducts = mysqli_query($conn, "SELECT * FROM `products` ORDER BY `id` DESC");
 //dd($getProducts);
+if (isset($_GET["s"])){
+    $s = $_GET["s"];
+}
 ?>
 
 <!doctype html>
@@ -121,7 +124,11 @@ $getProducts = mysqli_query($conn, "SELECT * FROM `products` ORDER BY `id` DESC"
                             <div class="collection-product-container">
                                 <div class="row">
                                     <?php
-                                    $getPopularProducts = mysqli_query($conn, "SELECT * FROM `products` ORDER BY `id` DESC LIMIT 4");
+                                    if (isset($_GET["s"])){
+                                        $getPopularProducts = mysqli_query($conn, "SELECT * FROM `products` WHERE (`name` LIKE '%$s%') OR (`tags` LIKE '%$s%') OR (`description` LIKE '%$s%') ORDER BY `id` DESC");
+                                    }else{
+                                        $getPopularProducts = mysqli_query($conn, "SELECT * FROM `products` ORDER BY `id` DESC");
+                                    }
 
                                     if (mysqli_num_rows($getPopularProducts) > 0) :
                                     while ($products = mysqli_fetch_assoc($getPopularProducts)) :

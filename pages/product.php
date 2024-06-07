@@ -1,4 +1,5 @@
 <?php
+global $conn;
 if (isset($_GET["pid"])) {
     $productid = $_GET["pid"];
 } else {
@@ -9,8 +10,10 @@ if (isset($_SESSION["user"])) {
     $userid = $_SESSION["user"]["userid"];
 }
 
-$discount;
-$amonunt;
+$discount = 0;
+$amount = 0;
+$shipping = 0;
+$payment_amount = 0;
 $getProduct = mysqli_query($conn, "SELECT * FROM `products` WHERE `productid` = '$productid'");
 $product = mysqli_fetch_array($getProduct);
 
@@ -22,7 +25,15 @@ if ($product["discount"] == 0) {
     $amount = $discount;
 }
 
-
+if((float)$product["price"] <= 1000){
+    $shipping = (float)$product["price"] * 0.1;
+}elseif ((float)$product["price"] <= 5000){
+    $shipping = (float)$product["price"] * 0.15;
+}else{
+    $shipping = (float)$product["price"] * 0.25;
+}
+$paymentamount = (float)$product["price"] + $shipping;
+//dd($paymentamount);
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -204,10 +215,23 @@ if ($product["discount"] == 0) {
                                     }
                                     ?>
                                 </form>
-                                <form method="post" action="/single-checkout">
-                                    <input type="hidden" name="qty" class="qty-copy">
+                                <form method="post" action="/checkout">
+                                    <?php
+                                    $items = [
+                                        [
+                                            "userid" => $userid,
+                                            "productid" => $productid,
+                                            "quantity" => "1"
+                                        ]
+                                    ];
+                                    $a = json_encode($items);
+
+
+                                    ?>
+                                    <textarea name="items" hidden="hidden"><?=$a;?></textarea>
+                                    <input type="hidden" name="amount" value="<?=$paymentamount;?>">
                                     <div class="buy-it-now-btn mt-2">
-                                        <button name="buy" type="submit" class="position-relative btn-atc btn-buyit-now">BUY IT NOW</button>
+                                        <button type="submit" class="position-relative btn-atc btn-buyit-now">BUY IT NOW</button>
                                     </div>
 
                                 </form>
