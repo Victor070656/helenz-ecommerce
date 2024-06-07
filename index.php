@@ -29,6 +29,7 @@ $routes = [
     '/about' => "pages/about-us.php",
     '/contact' => "pages/contact.php",
     '/cart' => "pages/cart.php",
+    '/remove-from-cart' => "pages/remove-from-cart.php",
     '/checkout' => "pages/checkout.php",
     '/pay' => "pages/pay.php",
     '/single-checkout' => "pages/checkout2.php",
@@ -43,6 +44,8 @@ $routes = [
     '/user-profile' => "pages/profile.php",
     '/test' => "pages/test.php",
     '/action' => "pages/action.php",
+    '/user-orders' => "pages/orders.php",
+    '/view-order' => "pages/view-order.php",
 
 
 

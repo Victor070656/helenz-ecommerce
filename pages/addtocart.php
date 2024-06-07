@@ -15,10 +15,10 @@ if (isset($_GET["pid"])) {
 $checkWish = mysqli_query($conn, "SELECT * FROM `cart` WHERE `userid` = '$userid' AND `productid` = '$productid'");
 if (mysqli_num_rows($checkWish) > 0) {
     $addToCart = mysqli_query($conn, "UPDATE `cart` SET `quantity`=(`quantity` + 1) WHERE `userid` = '$userid' AND `productid` = '$productid'");
-    echo "<script>location.href='/';alert('One additional product added to your cart 🛒')</script>";
+    echo "<script>location.href='/cart';alert('One additional product added to your cart 🛒')</script>";
 } else {
     $addToCart = mysqli_query($conn, "INSERT INTO `cart` (`userid`, `productid`, `quantity`) VALUES ('$userid', '$productid', 1)");
     if ($addToCart) {
-        echo "<script>location.href='/';alert('Product added to your cart 🛒')</script>";
+        echo "<script>location.href='/cart';alert('Product added to your cart 🛒')</script>";
     }
 }

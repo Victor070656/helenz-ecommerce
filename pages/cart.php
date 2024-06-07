@@ -143,7 +143,7 @@ if (mysqli_num_rows($checkCart) > 0) {
                                             $productid = $item["productid"];
                                             $getProduct = mysqli_query($conn, "SELECT * FROM `products` WHERE `productid` = '$productid'");
                                             $product = mysqli_fetch_assoc($getProduct);
-
+                                            $product["price"] *= $item["quantity"];
 
                                             $diff = $product["price"] - ($product["price"] * ($product["discount"] / 100));
                                             $d = $product["price"] - $diff;
@@ -160,12 +160,11 @@ if (mysqli_num_rows($checkCart) > 0) {
                                                     </div>
                                                 </td>
                                                 <td class="cart-item-details">
-                                                    <h2 class="product-title"><a href="#">Eliot Reversible Sectional</a></h2>
-                                                    <p class="product-vendor">XS / Dove Gray</p>
+                                                    <h2 class="product-title"><a href="/product?pid=<?=$product['productid'];?>"><?=$item["quantity"]." ".$product["name"];?> </a></h2>
+                                                    <p class="product-vendor"><?=$product["tags"];?></p>
                                                 </td>
                                                 <td class="cart-item-quantity">
-
-                                                    <a href="#" class="product-remove mt-2">Remove</a>
+                                                    <a href="/remove-from-cart?uid=<?=$item['userid'];?>&pid=<?=$item['productid'];?>" class="product-remove mt-2">Remove</a>
                                                 </td>
                                                 <td class="cart-item-price text-end">
                                                     <div class="product-price">$<?= $diff; ?></div>

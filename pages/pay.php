@@ -9,6 +9,7 @@ if (!isset($_SESSION["user"])) {
 if (isset($_GET["msg"])){
     $data = $_SESSION["pay"];
 
+    $order_id = rand(1000000000, 9999999999);
     $order_items = $data["items"];
     $order_amount = $data["amount"];
     $order_firstname = $data["first-name"];
@@ -22,8 +23,8 @@ if (isset($_GET["msg"])){
     $order_address2 = $data["addr2"];
 
 //    insert order
-    $addOrder = mysqli_query($conn, "INSERT INTO `orders`(`items`, `amount`, `firstname`, `lastname`, `email`, `phone`, `country`, `city`, `zipcode`, `address1`, `address2`) 
-VALUES ('$order_items', '$order_amount', '$order_firstname', '$order_lastname', '$order_email', '$order_phone', '$order_country', '$order_city', '$order_zip', '$order_address1', '$order_address2')");
+    $addOrder = mysqli_query($conn, "INSERT INTO `orders`(`orderid`, `userid`, `items`, `amount`, `firstname`, `lastname`, `email`, `phone`, `country`, `city`, `zipcode`, `address1`, `address2`) 
+VALUES ('$order_id', '$userid', '$order_items', '$order_amount', '$order_firstname', '$order_lastname', '$order_email', '$order_phone', '$order_country', '$order_city', '$order_zip', '$order_address1', '$order_address2')");
     if($addOrder){
         $deleteCartItems = mysqli_query($conn, "DELETE FROM `cart` WHERE `userid` = '$userid'");
         echo "<script>location.href='/'; alert('Order completed ✅')</script>";

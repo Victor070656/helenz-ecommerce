@@ -37,7 +37,7 @@ if (isset($_SESSION["user"])) {
                                     <?= isset($userDetail) ? $userDetail["username"] : "User" ?>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#">Orders</a>
+                                    <a class="dropdown-item" href="/user-orders">Orders</a>
                                     <a class="dropdown-item" href="/user-profile">Profile</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/logout">Logout</a>

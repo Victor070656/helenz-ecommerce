@@ -24,7 +24,7 @@ foreach ($items as $item) {
     $productid = $item["productid"];
     $getProduct = mysqli_query($conn, "SELECT * FROM `products` WHERE `productid` = '$productid'");
     $product = mysqli_fetch_assoc($getProduct);
-
+    $product["price"] *= $item["quantity"];
 
     $diff = $product["price"] - ($product["price"] * ($product["discount"] / 100));
     $d = $product["price"] - $diff;
