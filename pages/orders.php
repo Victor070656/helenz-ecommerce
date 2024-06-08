@@ -20,7 +20,7 @@ $orders = mysqli_fetch_all($getOrders, true);
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Orders</title>
+    <title>Helenz || Orders</title>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

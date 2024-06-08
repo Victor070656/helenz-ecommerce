@@ -7,7 +7,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Bisum - eCommerce Bootstrap 5 Template</title>
+    <title>Helenz || Login</title>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -119,7 +119,7 @@
                                 </fieldset>
                             </div>
                             <div class="col-12 mt-3 text-center">
-                                <a href="#" class="text_14 d-block">Forgot your password?</a>
+                                <a href="/forgot-password" class="text_14 d-block">Forgot your password?</a>
                                 <button type="submit" name="login" class="btn-primary d-block mt-4 btn-signin">SIGN IN</button>
                                 <a href="/register" class="btn btn-link mt-2 ">CREATE AN ACCOUNT</a>
                             </div>

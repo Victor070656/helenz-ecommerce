@@ -1,21 +1,29 @@
 <?php
+global$conn;
 
-if (!isset($_SESSION["user"])) {
-    echo "<script>location.href='/login'</script>";
-} else {
-    $userid = $_SESSION["user"]["userid"];
+if (isset($_GET["e"])){
+    $email = $_GET["e"];
+}else{
+    echo "<script>location.href='/forgot-password'</script>";
+}
+
+$getUser = mysqli_query($conn, "SELECT * FROM `users` WHERE `email` = '$email'");
+if (mysqli_num_rows($getUser) > 0){
+    $user = mysqli_fetch_assoc($getUser);
+}else{
+    echo "<script>alert('User Not Found'); location.href='/forgot-password'</script>";
 }
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
 
 
-<!-- Mirrored from spreethemesprevious.github.io/bisum/html/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2024 11:37:56 GMT -->
+<!-- Mirrored from spreethemesprevious.github.io/bisum/html/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2024 11:36:54 GMT -->
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Test</title>
+    <title>Helenz || Code</title>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -100,89 +108,72 @@ if (!isset($_SESSION["user"])) {
                             </g>
                         </svg>
                     </li>
-                    <li>Test</li>
+                    <li>Code</li>
                 </ul>
             </div>
         </div>
         <!-- breadcrumb end -->
 
         <main id="MainContent" class="content-for-layout">
-            <div class="cart-page mt-100">
+            <div class="login-page mt-100">
                 <div class="container">
-                    <div class="cart-page-wrapper">
-                        <table class="table table-hoverable">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Phone Number</th>
-                                    <th>Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $getUser = "SELECT * FROM `users` WHERE `userid` = '$userid'";
-                                $run = mysqli_query($conn, $getUser);
+                    <div class="login-form common-form mx-auto">
+                    <form method="post" class="">
+                        <div class="section-header mb-3">
+                            <h2 class="section-heading text-center">Reset Code</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <fieldset>
+                                    <label class="label">Enter Code</label>
+                                    <input type="text" name="code" placeholder="12345" required />
+                                </fieldset>
+                            </div>
+                            <div class="col-12 mt-3 text-center">
+                                <button type="submit" name="send" class="btn-primary d-block mt-4 btn-signin">CONFIRM</button>
+                            </div>
+                        </div>
+                        <!-- login -->
+                        <?php
+                        if (isset($_POST["send"])) {
+                            $resetCode = $_POST["code"];
 
-                                if (mysqli_num_rows($run) > 0) {
-                                    $user = mysqli_fetch_array($run);
-
-                                ?>
-
-
-                                    <tr>
-                                        <td><?php echo $user["userid"]; ?></td>
-                                        <td><?php echo $user["firstname"]; ?></td>
-                                        <td><?php echo $user["lastname"]; ?></td>
-                                        <td><?php echo $user["phone"]; ?></td>
-                                        <td><?php echo $user["email"]; ?></td>
-                                    </tr>
-
-                                <?php
+                            $checkCode = mysqli_query($conn, "SELECT * FROM `users` WHERE `email`='$email' AND `code` = '$resetCode'");
+                            if (mysqli_num_rows($checkCode) > 0) {
+                                echo "<script>location.href='/reset?e=$email&c=$resetCode'</script>";
+                            }else{
+                                echo "<script>alert('Wrong code!');</script>";
+                            }
+                        }
+                        ?>
+                    </form>
+                    <form method="post">
+                        <div class="text-center">
+                            <input type="submit" name="resend" value="Resend Code" class="btn btn-link border-0" >
+                        </div>
+                        <?php
+                        if (isset($_POST["resend"])){
+                            $code = rand(10000, 99999);
+                            $body = "Your verification code is: <b>$code</b>";
+                            $addCode = mysqli_query($conn, "UPDATE `users` SET `code` = '$code' WHERE `email` = '$email'");
+                            if($addCode){
+                                $send = sendMail($email, "Password Reset", $body, "Code sent successfully");
+                                if ($send){
+                                    echo "<script>location.href='/code?e=$email'</script>";
+                                }else{
+                                    echo "<script>alert('An error occurred: code not sent');</script>";
                                 }
-                                ?>
-                            </tbody>
-                        </table>
-                        <table class="table table-hoverable">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Phone Number</th>
-                                    <th>Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $getUser = "SELECT * FROM `users`";
-                                $run = mysqli_query($conn, $getUser);
-
-                                if (mysqli_num_rows($run) > 0) {
-                                    while($user = mysqli_fetch_array($run)){
-                                       
-                                ?>
-
-
-                                    <tr>
-                                        <td><?php echo $user["userid"]; ?></td>
-                                        <td><?php echo $user["firstname"]; ?></td>
-                                        <td><?php echo $user["lastname"]; ?></td>
-                                        <td><?php echo $user["phone"]; ?></td>
-                                        <td><?php echo $user["email"]; ?></td>
-                                    </tr>
-
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                            }else{
+                                echo "<script>alert('Something went wrong');</script>";
+                            }
+                        }
+                        ?>
+                    </form>
                     </div>
                 </div>
             </div>
         </main>
+
         <!-- include footer -->
         <?php
         include("components/footer.php");
@@ -197,6 +188,6 @@ if (!isset($_SESSION["user"])) {
 </body>
 
 
-<!-- Mirrored from spreethemesprevious.github.io/bisum/html/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2024 11:37:56 GMT -->
+<!-- Mirrored from spreethemesprevious.github.io/bisum/html/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 May 2024 11:36:54 GMT -->
 
 </html>

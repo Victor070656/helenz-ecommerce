@@ -17,7 +17,7 @@ if (isset($_GET["s"])){
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Bisum - eCommerce Bootstrap 5 Template</title>
+    <title>Helenz || Shop</title>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

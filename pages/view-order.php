@@ -7,8 +7,14 @@ if (!isset($_SESSION["user"])) {
     $userid = $_SESSION["user"]["userid"];
 }
 
-$getOrders = mysqli_query($conn, "SELECT * FROM `orders` WHERE `userid` = '$userid'");
-$orders = mysqli_fetch_all($getOrders, true);
+if (isset($_GET["oid"])){
+    $orderid = $_GET["oid"];
+}else{
+    echo "<script>location.href='/user-orders'</script>";
+}
+
+$getOrders = mysqli_query($conn, "SELECT * FROM `orders` WHERE `orderid` = '$orderid'");
+$orders = mysqli_fetch_assoc($getOrders);
 //dd($orders);
 ?>
 <!doctype html>
@@ -20,7 +26,7 @@ $orders = mysqli_fetch_all($getOrders, true);
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Orders</title>
+    <title>Helenz || View Orders</title>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -115,42 +121,58 @@ $orders = mysqli_fetch_all($getOrders, true);
             <div class="cart-page mt-100">
                 <div class="container">
                     <div class="section-header mb-3">
-                        <h2 class="section-heading">My Orders</h2>
+                        <?php
+                        $date1 = new DateTime($orders["created_at"]);
+                        $date2 = new DateTime($orders["created_at"]);
+                        $date1->modify("+ 14 days");
+                        $date2->modify("+ 28 days");
+                        $first_date = $date1->format("D d F Y");
+                        $second_date = $date2->format("D d F Y");
+                        ?>
+                        <h2 class="section-heading">#<?=$orders["orderid"];?></h2>
+                        <small class="text-secondary"><?=$orders["status"];?></small>
+                        <br>
+                        <P class="text-secondary fs-5">
+                            Order to be delivered between
+                            <b><?=$first_date;?></b>
+                            and
+                            <b><?=$second_date;?></b>
+                        </P>
                     </div>
                     <div class="card py-3 px-3">
                         <div class="card-body">
                             <?php
-                            foreach ($orders as $order){
-                                $items = json_decode($order["items"], true);
+//                            dd($orders);
+
+                                $a = $orders["items"];
+                                $items = json_decode($a, true);
+                            for ($i = 0; $i < count($items); $i++){
+                            $productid = $items[$i]["productid"];
+                            $getProduct = mysqli_query($conn, "SELECT * FROM `products` WHERE `productid` = '$productid'");
+                            $product = mysqli_fetch_assoc($getProduct);
+
 
                             ?>
-                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom table-responsive">
-
-                                    <div class="info">
-                                        <h5><a href="#" class="text-secondary">#<?=$order["orderid"];?></a></h5>
-                                        <div class="text-truncate">
-                                            <p class="">
-                                                <?php
-                                                for ($i = 0; $i < count($items); $i++){
-                                                    $productid = $items[$i]["productid"];
-                                                    $getProduct = mysqli_query($conn, "SELECT * FROM `products` WHERE `productid` = '$productid'");
-                                                    $product = mysqli_fetch_assoc($getProduct);
-                                                    if ($items[$i] == $items[count($items)-1]){
-                                                        echo $items[$i]["quantity"]." ".$product["name"];
-                                                    }else{
-                                                        echo $items[$i]["quantity"]." ".$product["name"].", ";
-                                                    }
-
-                                                }
-//
-                                                ?>
-                                            </p>
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom table-responsive">
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3">
+                                            <img src="uploads/<?=$product['image'];?>" class="img-fluid" style="width: 80px;" />
                                         </div>
+                                        <div class="info">
+                                            <h5 class="text-secondary"><?=$items[$i]["quantity"]." ".$product["name"];?></h5>
+                                            <div class="text-truncate">
+                                                <p class="">
+                                                   <b>Tags:</b> <?=$product["tags"];?>
+                                                </p>
+                                            </div>
 
-                                        <small class="text-secondary"><?=$order["status"];?></small>
+
+                                        </div>
                                     </div>
-                                    <div class="action px-3">
-                                        <h5><a href="#" class="text-dark">⟫</a></h5>
+                                    <div class="me-3">
+                                        <p class="fw-bold">
+                                            <?=str_replace(" ", "<br>", $orders["created_at"]);?>
+                                        </p>
                                     </div>
                                 </div>
                             <?php

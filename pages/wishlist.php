@@ -15,7 +15,7 @@ if (!isset($_SESSION["user"])) {
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Bisum - eCommerce Bootstrap 5 Template</title>
+    <title>Helenz || Wishlist</title>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
