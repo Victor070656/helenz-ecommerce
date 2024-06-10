@@ -1,7 +1,20 @@
 <?php
+global $conn;
 if (!isset($_SESSION["admin"])) {
   echo "<script>location.href='/admin-login'</script>";
 }
+if (isset($_GET["s"])) {
+  $s = $_GET["s"];
+}
+if (isset($s)) {
+  $getOrders = mysqli_query($conn, "SELECT * FROM `orders` WHERE (`orderid` LIKE '%$s%') OR (`userid` LIKE '%$s%') OR (`status` LIKE '%$s%') ORDER BY `id` DESC");
+} else {
+  $getOrders = mysqli_query($conn, "SELECT * FROM `orders` ORDER BY `id` DESC");
+}
+
+$getRate = mysqli_query($conn, "SELECT * FROM `rate`");
+$rate = mysqli_fetch_assoc($getRate);
+
 ?>
 
 <!DOCTYPE html>
@@ -41,16 +54,18 @@ if (!isset($_SESSION["admin"])) {
 </head>
 
 <body>
-  <div class="loader">
-    <div class="spinner-grow text-primary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
+
 
   <div class="page-container">
     <?php include("theme/components/menu.php"); ?>
     <div class="page-content">
       <div class="main-wrapper">
+        <div class="container mb-3 d-flex align-items-center ">
+          <span class="me-3"><b>Dollar Rate: </b><?= $rate["rate"]; ?></span>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalId">
+            Update Dollar Rate
+          </button>
+        </div>
         <div class="row">
           <div class="col">
             <div class="card">
@@ -62,81 +77,54 @@ if (!isset($_SESSION["admin"])) {
                 </div>
 
                 <div class="row">
-                  <div class="table-responsive">
-                    <table class="table invoice-table">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Client</th>
-                          <th scope="col">Issued Date</th>
-                          <th scope="col">Total</th>
-                          <th scope="col">Handle</th>
-                          <th scope="col">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">3311</th>
-                          <td><img src="theme/assets/images/avatars/profile-image-1.png" alt=""> Nina Doe</td>
-                          <td>11 APR 2021</td>
-                          <td>$3223</td>
-                          <td><span class="badge bg-primary">Delivered</span></td>
-                          <td>
-                            <a href="#"><i data-feather="edit"></i></a>
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2331</th>
-                          <td><img src="theme/assets/images/avatars/profile-image-2.png" alt=""> John Doe</td>
-                          <td>7 APR 2021</td>
-                          <td>$3422</td>
-                          <td><span class="badge bg-info">Declined</span></td>
-                          <td>
-                            <a href="#"><i data-feather="edit"></i></a>
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2344</th>
-                          <td><img src="theme/assets/images/avatars/profile-image-3.jpg" alt=""> Jacob Doe</td>
-                          <td>7 APR 2021</td>
-                          <td>$2415</td>
-                          <td><span class="badge bg-primary">Delivered</span></td>
-                          <td>
-                            <a href="#"><i data-feather="edit"></i></a>
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2345</th>
-                          <td><img src="theme/assets/images/avatars/profile-image.png" alt=""> Nina Doe</td>
-                          <td>20 MAR 2021</td>
-                          <td>$3034</td>
-                          <td><span class="badge bg-warning">Processing</span></td>
-                          <td>
-                            <a href="#"><i data-feather="edit"></i></a>
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2355</th>
-                          <td><img src="theme/assets/images/avatars/profile-image-1.png" alt=""> John Doe</td>
-                          <td>20 MAR 2021</td>
-                          <td>$4337</td>
-                          <td><span class="badge bg-success">Delivered</span></td>
-                          <td>
-                            <a href="#"><i data-feather="edit"></i></a>
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="trash"></i></a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="col">
+                    <div class="card">
+                      <div class="card-body">
+
+
+                        <div class="row">
+                          <div class="table-responsive">
+                            <table class="table invoice-table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Client</th>
+                                  <th scope="col">Order Date</th>
+                                  <th scope="col">Amount</th>
+                                  <th scope="col">Status</th>
+                                  <th scope="col">Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <?php
+                                if (mysqli_num_rows($getOrders) > 0) {
+                                  $orders = mysqli_fetch_all($getOrders, MYSQLI_ASSOC);
+                                  foreach ($orders as $order) {
+                                    $userid = $order["userid"];
+                                    $getUser = mysqli_query($conn, "SELECT * FROM `users` WHERE `userid` = '$userid'");
+                                    $user = mysqli_fetch_assoc($getUser);
+                                ?>
+                                    <tr>
+                                      <th scope="row"><?= $order["orderid"]; ?></th>
+                                      <td><?= $user["username"]; ?></td>
+                                      <td><?= $order["created_at"]; ?></td>
+                                      <td>$<?= $order["amount"]; ?></td>
+                                      <td><span class="badge bg-primary"><?= $order["status"]; ?></span></td>
+                                      <td>
+                                        <a href="/order-detail?oid=<?= $order['orderid']; ?>"><i data-feather="eye"></i></a>
+                                      </td>
+                                    </tr>
+                                <?php
+                                  }
+                                }
+                                ?>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -146,6 +134,60 @@ if (!isset($_SESSION["admin"])) {
       </div>
 
     </div>
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" style="backdrop-filter: blur(5px);" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitleId">
+              Update Dollar Rate
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form method="post">
+            <div class="modal-body">
+              <div class="container-fluid">
+                <input type="number" placeholder="₦ 1450" value="<?= $rate["rate"]; ?>" name="rate" class="form-control" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+              <button type="submit" name="update" class="btn btn-primary">Update</button>
+            </div>
+            <?php
+            if (isset($_POST["update"])) {
+              $dollar_rate = $_POST["rate"];
+
+              $updateRate = mysqli_query($conn, "UPDATE `rate` SET `rate` = '$dollar_rate'");
+              if ($updateRate) {
+                echo "<script>alert('Updated Successfully ✅'); location.href='/show-orders'</script>";
+              }else{
+                echo "<script>alert('Something went wrong'); location.href='/show-orders'</script>";
+              }
+            }
+            ?>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var modalId = document.getElementById('modalId');
+
+      modalId.addEventListener('show.bs.modal', function(event) {
+        // Button that triggered the modal
+        let button = event.relatedTarget;
+        // Extract info from data-bs-* attributes
+        let recipient = button.getAttribute('data-bs-whatever');
+
+        // Use above variables to manipulate the DOM
+      });
+    </script>
 
   </div>
 

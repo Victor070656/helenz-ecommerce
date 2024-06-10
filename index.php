@@ -108,6 +108,7 @@ $routes = [
     '/show-products' => "theme/admin/products.php",
     '/delete-product' => "theme/admin/deleteproduct.php",
     '/show-orders' => "theme/admin/orders.php",
+    '/order-detail' => "theme/admin/view-order.php",
     '/show-users' => "theme/admin/users.php",
     '/admin-profile' => "theme/admin/adminprofile.php",
     '/available' => "theme/admin/available.php",

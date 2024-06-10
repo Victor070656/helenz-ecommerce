@@ -6,7 +6,7 @@ if (!isset($_SESSION["user"])) {
     $userid = $_SESSION["user"]["userid"];
     $email = $_SESSION["user"]["email"];
 }
-if (isset($_GET["msg"])){
+if (isset($_GET["msg"])) {
     $data = $_SESSION["pay"];
 
     $order_id = rand(1000000000, 9999999999);
@@ -22,25 +22,28 @@ if (isset($_GET["msg"])){
     $order_address1 = $data["addr1"];
     $order_address2 = $data["addr2"];
 
-//    insert order
+    //    insert order
     $addOrder = mysqli_query($conn, "INSERT INTO `orders`(`orderid`, `userid`, `items`, `amount`, `firstname`, `lastname`, `email`, `phone`, `country`, `city`, `zipcode`, `address1`, `address2`) 
 VALUES ('$order_id', '$userid', '$order_items', '$order_amount', '$order_firstname', '$order_lastname', '$order_email', '$order_phone', '$order_country', '$order_city', '$order_zip', '$order_address1', '$order_address2')");
-    if($addOrder){
+    if ($addOrder) {
         $deleteCartItems = mysqli_query($conn, "DELETE FROM `cart` WHERE `userid` = '$userid'");
         echo "<script>location.href='/'; alert('Order completed ✅')</script>";
     }
 }
 //dd($_POST);
-if ($_POST){
+if ($_POST) {
     $info = $_POST;
     $_SESSION["pay"] = $_POST;
-}else{
-    if (!isset($_GET["msg"])){
-    echo "<script>location.href='/cart'</script>";
+} else {
+    if (!isset($_GET["msg"])) {
+        echo "<script>location.href='/cart'</script>";
     }
 }
 
-$amount = ((float)$info["amount"])*1400;
+$getRate = mysqli_query($conn, "SELECT * FROM `rate`");
+$rate = mysqli_fetch_assoc($getRate);
+
+$amount = ((float)$info["amount"]) * $rate["rate"];
 
 //dd($_SESSION["pay"]);
 ?>
@@ -50,7 +53,7 @@ $amount = ((float)$info["amount"])*1400;
 
 
 <head>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
     <title>Helenz || Pay</title>
     <!-- meta tags -->
     <meta charset="utf-8">
@@ -157,10 +160,10 @@ $amount = ((float)$info["amount"])*1400;
                     <div class="card-body text-center">
                         <h1 class=" mb-3">✔️</h1>
                         <h1 class="display-3 fw-bold ">Proceed To Pay</h1>
-                        <h2 class="">Your order costs: $<?=$info["amount"];?></h2>
+                        <h2 class="">Your order costs: $<?= $info["amount"]; ?></h2>
                         <p class="mb-3">Orders take between 14 & 28 days to arrive. </p>
                         <form method="post" action="/action">
-                            <input name="amount" type="hidden" value="<?=$amount;?>">
+                            <input name="amount" type="hidden" value="<?= $amount; ?>">
                             <button type="submit" name="pay_now" class="btn btn-primary">Pay</button>
                         </form>
                     </div>
@@ -168,55 +171,53 @@ $amount = ((float)$info["amount"])*1400;
             </div>
             <!-- paystack integration -->
             <?php
-            if(isset($_POST['pay_now'])) {
-dd($_SESSION["pay"]);
+            if (isset($_POST['pay_now'])) {
+                dd($_SESSION["pay"]);
 
-                    $url = "https://api.paystack.co/transaction/initialize";
+                $url = "https://api.paystack.co/transaction/initialize";
 
-                    $fields = [
-                        'email' => $email,
-                        'amount' => $_POST["amount"] * 100, // Convert amount to kobo
-                        'callback_url' => "http://localhost:18000/pay?msg=success",
-                        'metadata' => ["cancel_action" => "http://localhost:18000/cart"]
-                    ];
+                $fields = [
+                    'email' => $email,
+                    'amount' => $_POST["amount"] * 100, // Convert amount to kobo
+                    'callback_url' => "http://localhost:18000/pay?msg=success",
+                    'metadata' => ["cancel_action" => "http://localhost:18000/cart"]
+                ];
 
-                    $fields_string = http_build_query($fields);
+                $fields_string = http_build_query($fields);
 
-                    //open connection
-                    $ch = curl_init();
+                //open connection
+                $ch = curl_init();
 
-                    //set the url, number of POST vars, POST data
-                    curl_setopt($ch, CURLOPT_URL, $url);
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                        "Authorization: Bearer $paystackSecretKey",
-                        "Cache-Control: no-cache",
-                    ));
+                //set the url, number of POST vars, POST data
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    "Authorization: Bearer $paystackSecretKey",
+                    "Cache-Control: no-cache",
+                ));
 
-                    //So that curl_exec returns the contents of the cURL; rather than echoing it
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                //So that curl_exec returns the contents of the cURL; rather than echoing it
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-                    //execute post
-                    $result = curl_exec($ch);
-                    $response = json_decode($result, true);
+                //execute post
+                $result = curl_exec($ch);
+                $response = json_decode($result, true);
 
-                    // Error handling
-                    if (curl_errno($ch)) {
-                        echo 'Error:' . curl_error($ch);
-                    } elseif ($response['status'] !== true) {
-                        echo 'Transaction Initialization Failed: ' . $response['message'];
-                    } else {
-                        // Redirect to Paystack payment page
-                        $authorization_url = $response['data']['authorization_url'];
-//                         header('Location: ' . $authorization_url);
-                        echo "<script>location.href='$authorization_url'</script>";
-                    }
+                // Error handling
+                if (curl_errno($ch)) {
+                    echo 'Error:' . curl_error($ch);
+                } elseif ($response['status'] !== true) {
+                    echo 'Transaction Initialization Failed: ' . $response['message'];
+                } else {
+                    // Redirect to Paystack payment page
+                    $authorization_url = $response['data']['authorization_url'];
+                    //                         header('Location: ' . $authorization_url);
+                    echo "<script>location.href='$authorization_url'</script>";
+                }
 
-                    //close connection
-                    curl_close($ch);
-
-
+                //close connection
+                curl_close($ch);
             }
             ?>
             <!-- paystack integration end -->

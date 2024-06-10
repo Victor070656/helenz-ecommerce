@@ -1,12 +1,15 @@
 <?php
+global $conn;
 if (!isset($_SESSION["admin"])) {
   echo "<script>location.href='/admin-login'</script>";
 }
+
+$getOrders = mysqli_query($conn, "SELECT * FROM `orders` ORDER BY `id` DESC LIMIT 5");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from polygons.space/circl/theme/templates/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 May 2024 10:50:17 GMT -->
 
 <head>
   <meta charset="utf-8">
@@ -101,73 +104,38 @@ if (!isset($_SESSION["admin"])) {
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">Client</th>
-                          <th scope="col">Issued Date</th>
-                          <th scope="col">Total</th>
-                          <th scope="col">Handle</th>
-                          <th scope="col">Actions</th>
+                          <th scope="col">Order Date</th>
+                          <th scope="col">Amount</th>
+                          <th scope="col">Status</th>
+<!--                          <th scope="col">Actions</th>-->
                         </tr>
                       </thead>
                       <tbody>
+                      <?php
+                      if (mysqli_num_rows($getOrders) > 0){
+                          $orders = mysqli_fetch_all($getOrders, MYSQLI_ASSOC);
+                          foreach ($orders as $order){
+                              $userid = $order["userid"];
+                              $getUser = mysqli_query($conn, "SELECT * FROM `users` WHERE `userid` = '$userid'");
+                              $user = mysqli_fetch_assoc($getUser);
+                      ?>
                         <tr>
-                          <th scope="row">3311</th>
-                          <td><img src="theme/assets/images/avatars/profile-image-1.png" alt=""> Nina Doe</td>
-                          <td>11 APR 2021</td>
-                          <td>$3223</td>
-                          <td><span class="badge bg-primary">Delivered</span></td>
-                          <td>
+                          <th scope="row"><?=$order["orderid"];?></th>
+                          <td><?=$user["username"];?></td>
+                          <td><?=$order["created_at"];?></td>
+                          <td>$<?=$order["amount"];?></td>
+                          <td><span class="badge bg-primary"><?=$order["status"];?></span></td>
+                          <!--<td>
                             <a href="#"><i data-feather="edit"></i></a>
                             <a href="#"><i data-feather="eye"></i></a>
                             <a href="#"><i data-feather="trash"></i></a>
-                          </td>
+                          </td>-->
                         </tr>
-                        <tr>
-                          <th scope="row">2331</th>
-                          <td><img src="theme/assets/images/avatars/profile-image-2.png" alt=""> John Doe</td>
-                          <td>7 APR 2021</td>
-                          <td>$3422</td>
-                          <td><span class="badge bg-info">Declined</span></td>
-                          <td>
-                            <a href="#"><i data-feather="edit"></i></a>
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2344</th>
-                          <td><img src="theme/assets/images/avatars/profile-image-3.jpg" alt=""> Jacob Doe</td>
-                          <td>7 APR 2021</td>
-                          <td>$2415</td>
-                          <td><span class="badge bg-primary">Delivered</span></td>
-                          <td>
-                            <a href="#"><i data-feather="edit"></i></a>
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2345</th>
-                          <td><img src="theme/assets/images/avatars/profile-image.png" alt=""> Nina Doe</td>
-                          <td>20 MAR 2021</td>
-                          <td>$3034</td>
-                          <td><span class="badge bg-warning">Processing</span></td>
-                          <td>
-                            <a href="#"><i data-feather="edit"></i></a>
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2355</th>
-                          <td><img src="theme/assets/images/avatars/profile-image-1.png" alt=""> John Doe</td>
-                          <td>20 MAR 2021</td>
-                          <td>$4337</td>
-                          <td><span class="badge bg-success">Delivered</span></td>
-                          <td>
-                            <a href="#"><i data-feather="edit"></i></a>
-                            <a href="#"><i data-feather="eye"></i></a>
-                            <a href="#"><i data-feather="trash"></i></a>
-                          </td>
-                        </tr>
+                      <?php
+                          }
+                      }
+                      ?>
+
                       </tbody>
                     </table>
                   </div>

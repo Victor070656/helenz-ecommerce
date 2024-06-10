@@ -97,16 +97,16 @@
                     ]
                 }'>
           <div class="slide-item slide-item-bag position-relative">
-            <img class="slide-img d-none d-md-block" src="assets/img/slideshow/s1.jpg" alt="slide-1" />
-            <img class="slide-img d-md-none" src="assets/img/slideshow/s1-m.jpg" alt="slide-1" />
+            <img class="slide-img d-none d-md-block" src="assets/img/slideshow/slide1-m.png" alt="slide-1" />
+            <img class="slide-img d-md-none" src="assets/img/slideshow/slide1.png" alt="slide-1" />
             <div class="content-absolute content-slide">
               <div class="container height-inherit d-flex align-items-center">
                 <div class="content-box slide-content py-4">
-                  <h2 class="slide-heading heading_72 animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
-                    ZEN VIVID 16
+                  <h2 class="slide-heading heading_48 animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
+                    Step into Style with <br> Helenz Footwear
                   </h2>
                   <p class="slide-subheading heading_18 animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
-                    Look for your inspiration here
+                    Discover the latest trends in footwear fashion.
                   </p>
                   <a class="btn-primary slide-btn animate__animated animate__fadeInUp" href="collection-left-sidebar.html" data-animation="animate__animated animate__fadeInUp">SHOP NOW</a>
                 </div>
@@ -114,16 +114,16 @@
             </div>
           </div>
           <div class="slide-item slide-item-bag position-relative">
-            <img class="slide-img d-none d-md-block" src="assets/img/slideshow/s2.jpg" alt="slide-2" />
-            <img class="slide-img d-md-none" src="assets/img/slideshow/s2-m.jpg" alt="slide-2" />
+            <img class="slide-img d-none d-md-block" src="assets/img/slideshow/slide2-m.png" alt="slide-2" />
+            <img class="slide-img d-md-none" src="assets/img/slideshow/slide2.png" alt="slide-2" />
             <div class="content-absolute content-slide">
               <div class="container height-inherit d-flex align-items-center">
                 <div class="content-box slide-content py-4">
-                  <h2 class="slide-heading heading_72 animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
-                    PLEATED HEEL
+                  <h2 class="slide-heading heading_48 animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
+                    Unmatched Comfort, <br> Unbeatable Prices
                   </h2>
                   <p class="slide-subheading heading_18 animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
-                    Look for your inspiration here
+                    Experience luxury without breaking the bank
                   </p>
                   <a class="btn-primary slide-btn animate__animated animate__fadeInUp" href="collection-left-sidebar.html" data-animation="animate__animated animate__fadeInUp">SHOP NOW</a>
                 </div>
@@ -131,16 +131,16 @@
             </div>
           </div>
           <div class="slide-item slide-item-bag position-relative">
-            <img class="slide-img d-none d-md-block" src="assets/img/slideshow/s3.jpg" alt="slide-3" />
-            <img class="slide-img d-md-none" src="assets/img/slideshow/s3-m.jpg" alt="slide-3" />
+            <img class="slide-img d-none d-md-block" src="assets/img/slideshow/slide3-m.png" alt="slide-3" />
+            <img class="slide-img d-md-none" src="assets/img/slideshow/slide3.png" alt="slide-3" />
             <div class="content-absolute content-slide">
               <div class="container height-inherit d-flex align-items-center">
                 <div class="content-box slide-content py-4">
-                  <h2 class="slide-heading heading_72 animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
-                    MEN'S SHOES
+                  <h2 class="slide-heading heading_48 animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
+                    Exclusive Designs: <br> Stand Out with Helenz
                   </h2>
                   <p class="slide-subheading heading_18 animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
-                    Look for your inspiration here
+                    Be unique, be bold, be you...
                   </p>
                   <a class="btn-primary slide-btn animate__animated animate__fadeInUp" href="collection-left-sidebar.html" data-animation="animate__animated animate__fadeInUp">SHOP NOW</a>
                 </div>
@@ -165,10 +165,10 @@
                   </div>
                   <div class="trusted-content">
                     <h2 class="heading_18 trusted-heading">
-                      Free Shipping & Return
+                      International Delivery
                     </h2>
                     <p class="text_16 trusted-subheading trusted-subheading-2">
-                      On all order over $99.00
+                      Global delivery available
                     </p>
                   </div>
                 </div>
@@ -297,14 +297,14 @@
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-6 col-md-6 col-12" data-aos="fade-right" data-aos-duration="1200">
-                <a class="banner-item position-relative rounded" href="collection-left-sidebar.html">
-                  <img class="banner-img" src="assets/img/banner/shoe-1.jpg" alt="banner-1" />
+                <a class="banner-item position-relative rounded" href="/shop">
+                  <img class="banner-img" src="assets/img/banner/banner1.jpg" alt="banner-1" />
                   <div class="content-absolute content-slide">
                     <div class="container height-inherit d-flex align-items-center">
                       <div class="content-box banner-content p-4">
-                        <p class="heading_18 mb-3 text-white">Sports Shoes</p>
+                        <p class="heading_18 mb-3 text-white">Male footwear</p>
                         <h2 class="heading_34 text-white">
-                          25% off for <br />sports men
+                          2% - 10% off for <br />men footwear
                         </h2>
                       </div>
                     </div>
@@ -312,14 +312,14 @@
                 </a>
               </div>
               <div class="col-lg-6 col-md-6 col-12" data-aos="fade-left" data-aos-duration="1200">
-                <a class="banner-item position-relative rounded" href="collection-left-sidebar.html">
-                  <img class="banner-img" src="assets/img/banner/shoe-2.jpg" alt="banner-2" />
+                <a class="banner-item position-relative rounded" href="/shop">
+                  <img class="banner-img" src="assets/img/banner/banner2.jpg" alt="banner-2" />
                   <div class="content-absolute content-slide">
                     <div class="container height-inherit d-flex align-items-center">
                       <div class="content-box banner-content p-4">
-                        <p class="heading_18 mb-3 text-white">Sports Shoes</p>
+                        <p class="heading_18 mb-3 text-white">Female footwear</p>
                         <h2 class="heading_34 text-white">
-                          25% off for <br />sports women
+                          2% - 10% off for <br />women footwear
                         </h2>
                       </div>
                     </div>
@@ -423,10 +423,10 @@
                   Climb up to the mountain with Helenz Footwear
                 </h2>
                 <p class="single-banner-text text_16 text-white animate__animated animate__fadeInUp" data-animation="animate__animated animate__fadeInUp">
-                  Free shipping, and no hassle returns. Helenz Footwear Running shoes for
+                  International shipping, and fast delivery. Helenz Footwear Beaded African Footwear for
                   men & women
                 </p>
-                <a class="btn-primary single-banner-btn animate__animated animate__fadeInUp" href="collection-left-sidebar.html" data-animation="animate__animated animate__fadeInUp">
+                <a class="btn-primary single-banner-btn animate__animated animate__fadeInUp" href="/shop" data-animation="animate__animated animate__fadeInUp">
                   SHOP NOW
                 </a>
               </div>
@@ -474,58 +474,62 @@
                             }'>
                 <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
                   <div class="instagram-card">
-                    <a class="instagram-img-wrapper" href="index-shoe.html">
+                    <a class="instagram-img-wrapper">
+                      <img src="assets/img/instagram/s5.jpg" alt="img" class="instagram-card-img rounded" style="height: 350px; width: 100%; object-fit: cover; " />
+                    </a>
+                  </div>
+                </div>
+                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
+                  <div class="instagram-card">
+                    <a class="instagram-img-wrapper">
+                      <img src="assets/img/instagram/s6.jpg" alt="img" class="instagram-card-img rounded" style="height: 350px; width: 100%; object-fit: cover; " />
+                    </a>
+                  </div>
+                </div>
+                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
+                  <div class="instagram-card">
+                    <a class="instagram-img-wrapper">
+                      <img src="assets/img/instagram/s7.jpg" alt="img" class="instagram-card-img rounded" style="height: 350px; width: 100%; object-fit: cover; " />
+                    </a>
+                  </div>
+                </div>
+                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
+                  <div class="instagram-card">
+                    <a class="instagram-img-wrapper">
+                      <img src="assets/img/instagram/s8.jpg" alt="img" class="instagram-card-img rounded" style="height: 350px; width: 100%; object-fit: cover; " />
+                    </a>
+                  </div>
+                </div>
+                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
+                  <div class="instagram-card">
+                    <a class="instagram-img-wrapper">
+                      <img src="assets/img/instagram/s9.jpg" alt="img" class="instagram-card-img rounded" style="height: 350px; width: 100%; object-fit: cover; " />
+                    </a>
+                  </div>
+                </div>
+                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
+                  <div class="instagram-card">
+                    <a class="instagram-img-wrapper">
+                      <img src="assets/img/instagram/s10.jpg" alt="img" class="instagram-card-img rounded" style="height: 350px; width: 100%; object-fit: cover; " />
+                    </a>
+                  </div>
+                </div>
+                <!-- <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
+                  <div class="instagram-card">
+                    <a class="instagram-img-wrapper" >
                       <img src="assets/img/instagram/s1.jpg" alt="img" class="instagram-card-img rounded" />
                     </a>
                   </div>
-                </div>
-                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                  <div class="instagram-card">
-                    <a class="instagram-img-wrapper" href="index-shoe.html">
-                      <img src="assets/img/instagram/s2.jpg" alt="img" class="instagram-card-img rounded" />
-                    </a>
-                  </div>
-                </div>
-                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                  <div class="instagram-card">
-                    <a class="instagram-img-wrapper" href="index-shoe.html">
-                      <img src="assets/img/instagram/s3.jpg" alt="img" class="instagram-card-img rounded" />
-                    </a>
-                  </div>
-                </div>
-                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                  <div class="instagram-card">
-                    <a class="instagram-img-wrapper" href="index-shoe.html">
-                      <img src="assets/img/instagram/s4.jpg" alt="img" class="instagram-card-img rounded" />
-                    </a>
-                  </div>
-                </div>
-                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                  <div class="instagram-card">
-                    <a class="instagram-img-wrapper" href="index-shoe.html">
-                      <img src="assets/img/instagram/s2.jpg" alt="img" class="instagram-card-img rounded" />
-                    </a>
-                  </div>
-                </div>
-                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                  <div class="instagram-card">
-                    <a class="instagram-img-wrapper" href="index-shoe.html">
-                      <img src="assets/img/instagram/s4.jpg" alt="img" class="instagram-card-img rounded" />
-                    </a>
-                  </div>
-                </div>
-                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                  <div class="instagram-card">
-                    <a class="instagram-img-wrapper" href="index-shoe.html">
-                      <img src="assets/img/instagram/s1.jpg" alt="img" class="instagram-card-img rounded" />
-                    </a>
-                  </div>
-                </div>
+                </div> -->
               </div>
               <div class="activate-arrows show-arrows-always article-arrows arrows-white"></div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="text-center mt-5">
+        <p class="fs-5">Contact us for your <b>special order</b> or <b>customized footwear</b> </p>
+        <a href="#" class="btn btn-primary">Get in touch ⟫ </a>
       </div>
       <!-- instagram end -->
 

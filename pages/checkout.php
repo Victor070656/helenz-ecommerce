@@ -6,9 +6,9 @@ if (!isset($_SESSION["user"])) {
     $userid = $_SESSION["user"]["userid"];
 }
 //dd($_POST);
-if ($_POST){
+if ($_POST) {
     $info = $_POST;
-}else{
+} else {
     echo "<script>location.href='/cart'</script>";
 }
 $items = json_decode($info["items"], true);
@@ -20,7 +20,7 @@ $discount = 0;
 $total = 0;
 $shipping = 0;
 foreach ($items as $item) {
-// dd($item);
+    // dd($item);
     $productid = $item["productid"];
     $getProduct = mysqli_query($conn, "SELECT * FROM `products` WHERE `productid` = '$productid'");
     $product = mysqli_fetch_assoc($getProduct);
@@ -33,11 +33,11 @@ foreach ($items as $item) {
     $discount += $d;
     $total += $product["price"];
 }
-if($total <= 1000){
+if ($total <= 1000) {
     $shipping = $total * 0.1;
-}elseif ($total <= 5000){
+} elseif ($total <= 5000) {
     $shipping = $total * 0.15;
-}else{
+} else {
     $shipping = $total * 0.25;
 }
 ?>
@@ -166,8 +166,8 @@ if($total <= 1000){
                                         <div class="shipping-address-form-wrapper">
                                             <div class="shipping-address-form common-form">
                                                 <div class="row">
-                                                    <textarea name="items" hidden="hidden"><?=$info["items"];?></textarea>
-                                                    <input type="hidden" name="amount" value="<?=$info["amount"];?>"/>
+                                                    <textarea name="items" hidden="hidden"><?= $info["items"]; ?></textarea>
+                                                    <input type="hidden" name="amount" value="<?= $info["amount"]; ?>" />
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <fieldset>
                                                             <label class="label">First name
@@ -257,13 +257,13 @@ if($total <= 1000){
                                             </div>
                                             <div class="subtotal-item shipping-box">
                                                 <h4 class="subtotal-title">Shipping:</h4>
-                                                <p class="subtotal-value">$<?= $shipping;?></p>
+                                                <p class="subtotal-value">$<?= $shipping; ?></p>
                                             </div>
 
                                             <hr />
                                             <div class="subtotal-item discount-box">
                                                 <h4 class="subtotal-title">Total:</h4>
-                                                <p class="subtotal-value">$<?= $amount ;?></p>
+                                                <p class="subtotal-value">$<?= $amount; ?></p>
                                             </div>
                                             <p class="shipping_text">Shipping & taxes calculated at checkout</p>
                                             <div class="d-flex justify-content-center mt-4">
@@ -273,7 +273,7 @@ if($total <= 1000){
                                                 $a = json_encode($items);
                                                 ?>
 
-                                                <input type="submit" value="Proceed to Pay" class="position-relative btn-primary text-uppercase" >
+                                                <input type="submit" value="Proceed to Pay" class="position-relative btn-primary text-uppercase">
 
                                             </div>
                                         </div>
