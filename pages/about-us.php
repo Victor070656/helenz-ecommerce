@@ -106,9 +106,14 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-12">
                                 <div class="about-hero-content">
-                                    <h2 class="about-hero-title">We Provide Expert Service and aim to have a long term with you</h2>
-                                    <p class="about-hero-subtitle">We provide a full range of front end mechanical repairs for all makes and models of cars, no matter</p>
-                                    <ul class="about-hero-action p-0">
+                                    <h2 class="about-hero-title">Welcome to Helenz Footwear</h2>
+                                    <p class="about-hero-subtitle">
+                                        At Helenz Footwear, we believe that every step you take should be a step in style, comfort, and confidence. Established in [Year], our mission has always been to provide high-quality, fashionable footwear that meets the diverse needs of our customers. Whether you're looking for everyday essentials, seasonal trends, or eco-friendly options, Helenz Footwear has you covered.
+                                    </p>
+                                    <p class="about-hero-subtitle">
+                                        Helenz Footwear was born out of a passion for shoes and a commitment to quality. Our founder, Helen Ogochukwu Nwiba, envisioned a brand where fashion meets functionality. From humble beginnings as a small boutique, we have grown into a trusted name in the footwear industry, known for our innovative designs and exceptional customer service.
+                                    </p>
+                                    <!-- <ul class="about-hero-action p-0">
                                         <li class="action-item d-flex">
                                             <div class="action-count">01</div>
                                             <div class="action-content">
@@ -130,7 +135,7 @@
                                                 <p class="action-subtitle">Ecstatic unsatiable saw his giving Remain expense you position concluded.</p>
                                             </div>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-12">
@@ -148,33 +153,33 @@
                     <div class="row g-0 justify-content-center">
                         <div class="col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-duration="300">
                             <div class="promotional-item overlay-blue">
-                                <img src="assets/img/about/p1.jpg" alt="img">
+                                <img src="assets/img/instagram/s9.jpg" alt="img" style="height: 450px; width: 100%; object-fit: cover; ">
                                 <div class="promotional-absolute">
                                     <div class="promotional-content text-center">
-                                        <h2 class="promo-title">Serve our customers and always deliver the customer service</h2>
-                                        <p class="promo-subtitle">We provide a full range of front end mechanical repairs for all makes and models of cars, no matter the cause. This includes</p>
+                                        <h2 class="promo-title">Quality and Craftsmanship</h2>
+                                        <p class="promo-subtitle">At Helenz Footwear, quality is at the heart of everything we do. We source the finest materials and employ skilled artisans to create shoes that are not only stylish but also durable.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-duration="700">
                             <div class="promotional-item overlay-black">
-                                <img src="assets/img/about/p2.jpg" alt="img">
+                                <img src="assets/img/instagram/s5.jpg" alt="img" style="height: 450px; width: 100%; object-fit: cover; ">
                                 <div class="promotional-absolute">
                                     <div class="promotional-content text-center">
-                                        <h2 class="promo-title">To be the world’s most eader in automotive business solutions.</h2>
-                                        <p class="promo-subtitle">We provide a full range of front end mechanical repairs for all makes and models of cars, no matter the cause. This includes</p>
+                                        <h2 class="promo-title">Sustainability</h2>
+                                        <p class="promo-subtitle">We are dedicated to making a positive impact on the planet. Our eco-friendly collection features shoes made from sustainable materials, designed to reduce our environmental footprint. </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-duration="1000">
                             <div class="promotional-item overlay-yellow">
-                                <img src="assets/img/about/p3.jpg" alt="img">
+                                <img src="assets/img/instagram/s7.jpg" alt="img" style="height: 450px; width: 100%; object-fit: cover; ">
                                 <div class="promotional-absolute">
                                     <div class="promotional-content text-center">
-                                        <h2 class="promo-title">We value the service we provide and our loyal returning customers </h2>
-                                        <p class="promo-subtitle">We provide a full range of front end mechanical repairs for all makes and models of cars, no matter the cause. This includes</p>
+                                        <h2 class="promo-title">Customer Commitment</h2>
+                                        <p class="promo-subtitle">Our customers are our top priority. We strive to provide an exceptional shopping experience, both online and in-store. From our user-friendly website to our attentive customer service team.</p>
                                     </div>
                                 </div>
                             </div>
@@ -199,8 +204,8 @@
                                             </svg>
                                         </div>
                                         <div class="about-service-content">
-                                            <h4 class="about-service-title">Convenient Service</h4>
-                                            <p class="about-service-subtitle">Through True Rich Attended does no end it his mother since real had half every him end it his mother</p>
+                                            <h4 class="about-service-title">Easy Online Shopping</h4>
+                                            <p class="about-service-subtitle">Browse our extensive collection from the comfort of your home. Our user-friendly website is designed to provide a seamless shopping experience, with detailed product descriptions, high-quality images, and customer reviews.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -212,8 +217,8 @@
                                             </svg>
                                         </div>
                                         <div class="about-service-content">
-                                            <h4 class="about-service-title">Expert Mechanics</h4>
-                                            <p class="about-service-subtitle">Through True Rich Attended does no end it his mother since real had half every him end it his mother</p>
+                                            <h4 class="about-service-title">Shoe Customization</h4>
+                                            <p class="about-service-subtitle">Make your footwear uniquely yours with our customization services. Choose from a variety of options including colors, materials, and even personalized monograms.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -225,8 +230,8 @@
                                             </svg>
                                         </div>
                                         <div class="about-service-content">
-                                            <h4 class="about-service-title">Transparent Pricing</h4>
-                                            <p class="about-service-subtitle">Through True Rich Attended does no end it his mother since real had half every him end it his mother</p>
+                                            <h4 class="about-service-title">Fast and Reliable Shipping</h4>
+                                            <p class="about-service-subtitle">Enjoy fast and reliable shipping on all orders. We offer standard, expedited, and international shipping options to meet your needs.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -323,8 +328,9 @@
                     <div class="container">
                         <div class="about-banner-wrapper">
                             <div class="about-banner-content">
-                                <p class="about-banner-text heading_48">Get in touch with us for your service related query</p>
-                                <a href="contact.html" class="about-banner-btn">CONTACT US</a>
+                                <p class="about-banner-text heading_48">Contact Us</p>
+                                <p class="text-white fs-5" >Have questions or need assistance? Reach out to our customer service team, we're here to help</p>
+                                <a href="/contact" class="about-banner-btn">CONTACT US</a>
                             </div>
                         </div>
                     </div>

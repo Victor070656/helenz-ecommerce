@@ -104,14 +104,14 @@
                     <div class="container">
                         <div class="section-header text-center">
                             <h2 class="section-heading">Frequently Asked Question</h2>
-                            <p class="section-subheading">All your questions about Axion answered </p>
+                            <p class="section-subheading">All your questions about Helenz Footwear answered </p>
                         </div>
                         <div class="faq-container">
                             <div class="row">
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                            Is Bisum a safe investment?
+                                            How do I place an order?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -119,11 +119,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq1" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                Placing an order is easy! Browse our collection, select your desired items, and click “Add to Cart.” Proceed to checkout, enter your shipping and payment information, and confirm your order.
                                             </p>
                                         </div>
                                     </div>
@@ -131,7 +128,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                            How do I set up a crypto wallet?
+                                            Are your shoes true to size?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -139,11 +136,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq2" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                Our shoes generally run true to size. However, we recommend checking and confirming your shoe size for the most accurate fit.
                                             </p>
                                         </div>
                                     </div>
@@ -151,7 +145,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                            Where and how do I buy Bisum?
+                                            Can I customize my shoes?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -159,11 +153,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq3" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                Yes! We offer customization services for select products. Choose from various colors, materials, and personalization options to make your shoes uniquely yours. Contact customer service for more details.
                                             </p>
                                         </div>
                                     </div>
@@ -171,7 +162,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                            What often will results be reported?
+                                            Is my payment information safe?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -179,11 +170,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq4" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                Yes, your payment information is protected with advanced security measures. We use encryption technology to ensure your data is secure.
                                             </p>
                                         </div>
                                     </div>
@@ -191,7 +179,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                            How can I get support?
+                                            How do I care for my Helenz shoes?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -199,11 +187,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq5" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                Generally, we recommend using a soft brush to remove dirt, a damp cloth for cleaning, and proper storage to maintain their shape.
                                             </p>
                                         </div>
                                     </div>
@@ -211,7 +196,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq6">
-                                            Is Axion available on a major Product exchange?
+                                            Are your shoes waterproof?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -219,11 +204,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq6" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                Some of our styles are designed to be water-resistant or waterproof. Please check the product description for details or use our filters to find waterproof options.
                                             </p>
                                         </div>
                                     </div>
@@ -231,7 +213,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                            Is Bisum a safe investment?
+                                            Do you ship internationally?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -239,11 +221,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq1" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                Yes, we offer international shipping to many countries. Shipping costs and delivery times vary based on the destination.
                                             </p>
                                         </div>
                                     </div>
@@ -251,7 +230,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                            How do I set up a crypto wallet?
+                                            Are there any additional fees for international orders?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -259,11 +238,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq2" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                International orders may be subject to customs duties and taxes, which are the responsibility of the customer. Please check with your local customs office for more information.
                                             </p>
                                         </div>
                                     </div>
@@ -271,7 +247,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                            Where and how do I buy Bisum?
+                                            Can I place a bulk order for a special event?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -279,11 +255,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq3" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                Yes, we accommodate bulk orders for weddings, corporate events, and other special occasions. Please contact our customer service team to discuss your needs.
                                             </p>
                                         </div>
                                     </div>
@@ -291,7 +264,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                            What often will results be reported?
+                                            I’m having trouble with your website. What should I do?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -299,11 +272,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq4" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                If you’re experiencing technical issues, please try clearing your browser’s cache and cookies or use a different browser. If the problem persists, contact our customer service team for assistance.
                                             </p>
                                         </div>
                                     </div>
@@ -311,7 +281,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                            How can I get support?
+                                            How do I create an account?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -319,11 +289,8 @@
                                             </span>
                                         </h2>
                                         <div id="faq5" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                Creating an account is simple! Click on the “Login” button at the top of our website, click on “CREATE ACCOUNT”, enter your details, and follow the prompts to complete the registration process.
                                             </p>
                                         </div>
                                     </div>
@@ -331,7 +298,7 @@
                                 <div class=" col-12">
                                     <div class="faq-item rounded">
                                         <h2 class="faq-heading heading_18 collapsed d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#faq6">
-                                            Is Axion available on a major Product exchange?
+                                            Can I share my Helenz Footwear experience or photos?
                                             <span class="faq-heading-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F76B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-down">
                                                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -339,18 +306,15 @@
                                             </span>
                                         </h2>
                                         <div id="faq6" class="accordion-collapse collapse">
-                                            <p class="faq-body text_14">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.
-                                                Sit repellat
-                                                quod facere illo esse cumque inventore veniam necessitatibus totam
-                                                repudiandae. Hic rerum animi modi sed?
+                                            <p class="faq-body text_14">
+                                                We love seeing our customers enjoy their Helenz shoes! Share your photos and experiences on social media using the hashtag #HelenzFootwear, and you might be featured on our website or social channels.
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="view-all text-center" data-aos="fade-up" data-aos-duration="700">
-                                <a class="btn-primary" href="faq.html">SEE MORE</a>
+                            <div class="text-center mt-5">
+                                <p class="fs-6" >For any other questions or assistance, please don’t hesitate to reach out to us. We’re here to help make your shopping experience with Helenz Footwear enjoyable and satisfying.</p>
                             </div>
                         </div>
                     </div>
