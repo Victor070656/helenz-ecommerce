@@ -4,8 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "baf0b1b659e688a64051c5ee9742a77e",
+    "content-hash": "7a67eb39d1d4e5858e856703ae0b96e6",
     "packages": [
+        {
+            "name": "matscode/paystack",
+            "version": "v1.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/matscode/paystack.git",
+                "reference": "97feac7c5506cd9231510e8e0f5836c28e1b7599"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/matscode/paystack/zipball/97feac7c5506cd9231510e8e0f5836c28e1b7599",
+                "reference": "97feac7c5506cd9231510e8e0f5836c28e1b7599",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Matscode\\Paystack\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Akanji",
+                    "email": "matscode@gmail.com",
+                    "homepage": "http://michaelakanji.com"
+                }
+            ],
+            "description": "This package is for communicating with PAYSTACK API",
+            "keywords": [
+                "payment",
+                "paystack",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/matscode/paystack/issues",
+                "source": "https://github.com/matscode/paystack/tree/v1.10.1"
+            },
+            "time": "2024-07-25T10:43:56+00:00"
+        },
         {
             "name": "phpmailer/phpmailer",
             "version": "v6.9.1",
@@ -91,10 +134,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

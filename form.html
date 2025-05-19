@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .progress-bar:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ddd;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            width: 30px;
+            height: 30px;
+            background: #ddd;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .progress-step.active {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn-next {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-prev {
+            background: #f44336;
+            color: white;
+        }
+        
+        .btn-submit {
+            background: #2196F3;
+            color: white;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Form</h1>
+        
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-step active" data-step="1">1</div>
+            <div class="progress-step" data-step="2">2</div>
+            <div class="progress-step" data-step="3">3</div>
+            <div class="progress-step" data-step="4">4</div>
+        </div>
+        
+        <!-- Step 1: Personal Information -->
+        <div class="form-step active" data-step="1">
+            <h2>Personal Information</h2>
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn-next" onclick="nextStep(1)">Next</button>
+            </div>
+        </div>
+        
+        <!-- Step 2: Contact Information -->
+        <div class="form-step" data-step="2">
+            <h2>Contact Information</h2>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="address">Street Address</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn-prev" onclick="prevStep(2)">Previous</button>
+                <button type="button" class="btn-next" onclick="nextStep(2)">Next</button>
+            </div>
+        </div>
+        
+        <!-- Step 3: Account Setup -->
+        <div class="form-step" data-step="3">
+            <h2>Account Setup</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn-prev" onclick="prevStep(3)">Previous</button>
+                <button type="button" class="btn-next" onclick="nextStep(3)">Next</button>
+            </div>
+        </div>
+        
+        <!-- Step 4: Preferences -->
+        <div class="form-step" data-step="4">
+            <h2>Preferences</h2>
+            <div class="form-group">
+                <label for="newsletter">Subscribe to Newsletter?</label>
+                <select id="newsletter" name="newsletter">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="notifications">Receive Notifications?</label>
+                <select id="notifications" name="notifications">
+                    <option value="email">Email</option>
+                    <option value="sms">SMS</option>
+                    <option value="both">Both</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="terms" required> I agree to the Terms and Conditions
+                </label>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn-prev" onclick="prevStep(4)">Previous</button>
+                <button type="submit" class="btn-submit">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function nextStep(currentStep) {
+            // Validate current step before proceeding
+            if (validateStep(currentStep)) {
+                // Hide current step
+                document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+                // Show next step
+                document.querySelector(`.form-step[data-step="${currentStep + 1}"]`).classList.add('active');
+                
+                // Update progress bar
+                document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.remove('active');
+                document.querySelector(`.progress-step[data-step="${currentStep + 1}"]`).classList.add('active');
+            }
+        }
+        
+        function prevStep(currentStep) {
+            // Hide current step
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+            // Show previous step
+            document.querySelector(`.form-step[data-step="${currentStep - 1}"]`).classList.add('active');
+            
+            // Update progress bar
+            document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.progress-step[data-step="${currentStep - 1}"]`).classList.add('active');
+        }
+        
+        function validateStep(step) {
+            let isValid = true;
+            const currentStep = document.querySelector(`.form-step[data-step="${step}"]`);
+            
+            // Check all required fields in current step
+            const requiredFields = currentStep.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#ddd';
+                }
+            });
+            
+            // Additional validation for specific steps
+            if (step === 3) {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    isValid = false;
+                }
+                
+                if (password.length < 8) {
+                    alert('Password must be at least 8 characters long!');
+                    isValid = false;
+                }
+            }
+            
+            return isValid;
+        }
+        
+        // Form submission (you would typically send this to a server)
+        document.querySelector('.btn-submit').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (validateStep(4)) {
+                // Here you would typically send the form data to a server
+                alert('Registration successful!');
+                // Reset form
+                document.querySelector('form').reset();
+            }
+        });
+    </script>
+</body>
+</html>
